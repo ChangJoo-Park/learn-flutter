@@ -2,5 +2,16 @@
   "dart.flutterSdkPath": "/Users/changjoopark/.local/share/mise/installs/flutter/3.29.3-stable",
   "debug.javascript.defaultRuntimeExecutable": {
     "pwa-node": "/Users/changjoopark/.local/share/mise/shims/node"
-  }
+  },
+  "typescript.validate.enable": true,
+  "javascript.validate.enable": true,
+  "files.exclude": {
+    "**/node_modules/**/*": true
+  },
+  "search.exclude": {
+    "**/node_modules/**/*": true
+  },
+  "typescript.disableAutomaticTypeAcquisition": true,
+  "typescript.tsserver.experimental.enableProjectDiagnostics": false,
+  "typescript.tsserver.enableTracing": true
 }
