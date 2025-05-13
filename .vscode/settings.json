@@ -1,0 +1,6 @@
+{
+  "dart.flutterSdkPath": "/Users/changjoopark/.local/share/mise/installs/flutter/3.29.3-stable",
+  "debug.javascript.defaultRuntimeExecutable": {
+    "pwa-node": "/Users/changjoopark/.local/share/mise/shims/node"
+  }
+}

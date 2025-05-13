@@ -7,11 +7,12 @@
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
+    "upgrade": "npx @astrojs/upgrade",
     "astro": "astro"
   },
   "dependencies": {
     "@astrojs/starlight": "^0.34.3",
-    "astro": "^5.6.1",
+    "astro": "^5.7.12",
     "sharp": "^0.32.5"
   }
 }
