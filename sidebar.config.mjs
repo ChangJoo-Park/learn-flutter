@@ -1,6 +1,6 @@
 export const sidebars = [
   {
-    label: "📦 Part 1. 시작하기",
+    label: "📦 1. 시작하기",
     items: [
       { label: "소개", slug: "part1/introduction" },
       { label: "개발 환경 구성", slug: "part1/setup" },
@@ -9,7 +9,7 @@ export const sidebars = [
     ],
   },
   {
-    label: "💡 Part 2. Dart 언어 기초",
+    label: "💡 2. Dart 언어 기초",
     items: [
       { label: "Dart 소개", slug: "part2/dart-intro" },
       { label: "기본 문법 및 변수", slug: "part2/basic-syntax" },
@@ -23,7 +23,7 @@ export const sidebars = [
     ],
   },
   {
-    label: "🧱 Part 3. Flutter의 기본 구성 요소",
+    label: "🧱 3. Flutter의 기본 구성 요소",
     items: [
       { label: "위젯 개념과 주요 위젯", slug: "part3/widgets" },
       {
@@ -36,7 +36,7 @@ export const sidebars = [
     ],
   },
   {
-    label: "🎨 Part 4. 상태 관리",
+    label: "🎨 4. 상태 관리",
     items: [
       { label: "상태 관리 입문", slug: "part4/state-management-intro" },
       {
@@ -48,7 +48,7 @@ export const sidebars = [
     ],
   },
   {
-    label: "🚦 Part 5. 네비게이션과 화면 구성",
+    label: "🚦 5. 네비게이션과 화면 구성",
     items: [
       { label: "Navigator 1.0", slug: "part5/navigator1" },
       { label: "Navigator 2.0", slug: "part5/navigator2" },
@@ -65,7 +65,7 @@ export const sidebars = [
     ],
   },
   {
-    label: "🔌 Part 6. 외부와의 연동",
+    label: "🔌 6. 외부와의 연동",
     items: [
       { label: "Dio를 통한 API 통신", slug: "part6/dio" },
       {
@@ -75,7 +75,7 @@ export const sidebars = [
     ],
   },
   {
-    label: "🧪 Part 7. 테스트와 디버깅",
+    label: "🧪 7. 테스트와 디버깅",
     items: [
       { label: "단위 테스트", slug: "part7/unit-test" },
       { label: "위젯 테스트", slug: "part7/widget-test" },
@@ -85,7 +85,7 @@ export const sidebars = [
     ],
   },
   {
-    label: "🚀 Part 8. 앱 배포 및 운영",
+    label: "🚀 8. 앱 배포 및 운영",
     items: [
       { label: "빌드 모드", slug: "part8/build-modes" },
       { label: "Android / iOS 배포", slug: "part8/deploy-procedure" },
@@ -96,14 +96,14 @@ export const sidebars = [
     ],
   },
   {
-    label: "🧭 Part 9. 프로젝트 구조 & 아키텍처",
+    label: "🧭 9. 프로젝트 구조 & 아키텍처",
     items: [
       { label: "기능별 vs 계층별 폴더 구조", slug: "part9/folder-structure" },
       { label: "멀티 모듈 아키텍처", slug: "part9/multi-module" },
     ],
   },
   {
-    label: "🌍 Part 10. 보완 학습",
+    label: "🌍 10. 보완 학습",
     items: [
       { label: "CustomPainter와 RenderBox", slug: "part10/custom-painting" },
       { label: "위젯 캐싱", slug: "part10/widget-caching" },

@@ -1,6 +1,7 @@
 ---
 title: 첫 프로젝트 생성 및 실행
 ---
+import { FileTree } from '@astrojs/starlight/components';
 
 이제 Flutter SDK와 개발 환경이 설정되었으므로, 첫 번째 Flutter 프로젝트를 생성하고 실행해 보겠습니다.
 
@@ -45,27 +46,31 @@ cd my_first_app
 
 Flutter 프로젝트가 생성되면, 다음과 같은 기본 파일 구조가 만들어집니다:
 
-```
-my_first_app/
-├── .dart_tool/        # Dart 도구 관련 파일
-├── .idea/             # IDE 설정 (Android Studio)
-├── android/           # 안드로이드 특화 코드
-├── build/             # 빌드 출력 파일
-├── ios/               # iOS 특화 코드
-├── lib/               # Dart 코드
-│   └── main.dart      # 앱의 진입점
-├── linux/             # Linux 특화 코드
-├── macos/             # macOS 특화 코드
-├── test/              # 테스트 코드
-├── web/               # 웹 특화 코드
-├── windows/           # Windows 특화 코드
-├── .gitignore         # Git 무시 파일
-├── .metadata          # Flutter 메타데이터
-├── analysis_options.yaml # Dart 분석 설정
-├── pubspec.lock       # 의존성 버전 잠금 파일
-├── pubspec.yaml       # 프로젝트 설정 및 의존성
-└── README.md          # 프로젝트 설명
-```
+
+<FileTree>
+
+- my_first_app/
+  -  .dart_tool/        # Dart 도구 관련 파일
+  -  .idea/             # IDE 설정 (Android Studio)
+  -  android/           # 안드로이드 특화 코드
+  -  build/             # 빌드 출력 파일
+  -  ios/               # iOS 특화 코드
+  -  lib/               # Dart 코드
+    -  main.dart      # 앱의 진입점
+  -  linux/             # Linux 특화 코드
+  -  macos/             # macOS 특화 코드
+  -  test/              # 테스트 코드
+  -  web/               # 웹 특화 코드
+  -  windows/           # Windows 특화 코드
+  -  .gitignore         # Git 무시 파일
+  -  .metadata          # Flutter 메타데이터
+  -  analysis_options.yaml # Dart 분석 설정
+  -  pubspec.lock       # 의존성 버전 잠금 파일
+  -  pubspec.yaml       # 프로젝트 설정 및 의존성
+  -  README.md          # 프로젝트 설명
+
+</FileTree>
+
 
 이 중에서 가장 중요한 파일은 다음과 같습니다:
 
