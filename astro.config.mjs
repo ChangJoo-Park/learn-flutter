@@ -46,5 +46,6 @@ export default defineConfig({
       ],
     ],
   },
-  site: "https://changjoo-park.github.io/learn-flutter"
+  site: "https://changjoo-park.github.io/learn-flutter",
+  base: "learn-flutter",
 });
