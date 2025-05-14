@@ -507,6 +507,10 @@ void main() {
 }
 ```
 
+![fpdart code](https://raw.githubusercontent.com/SandroMaglione/fpdart/main/resources/screenshots/screenshot_fpdart.png)
+
+[fpdart](https://pub.dev/packages/fpdart)를 이용하면 Result외에 더 다양한 함수형 프로그래밍 기능을 사용하실 수 있습니다.
+
 ## 결론
 
 Dart의 타입 시스템과 제네릭은 타입 안전성과 코드 재사용성을 동시에 얻을 수 있게 해줍니다. 정적 타입 시스템은 컴파일 시간에 많은 오류를 잡아낼 수 있으며, 제네릭은 다양한 타입에 대해 동일한 로직을 적용할 수 있게 해줍니다.
