@@ -14,9 +14,7 @@ import { sidebars } from "./sidebar.config.mjs";
 export default defineConfig({
   compressHTML: true,
   prefetch: false,
-  root: "/learn-flutter/",
   site: "https://changjoo-park.github.io/learn-flutter/",
-  base: "/learn-flutter/",
   integrations: [
     sitemap(),
     astroExpressiveCode({
