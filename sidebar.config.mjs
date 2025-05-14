@@ -94,7 +94,6 @@ export const sidebars = [
   {
     label: "🧭 Part 9. 프로젝트 구조 & 아키텍처",
     items: [
-      { label: "클린 아키텍처", slug: "part9/clean-architecture" },
       { label: "기능별 vs 계층별 폴더 구조", slug: "part9/folder-structure" },
       { label: "멀티 모듈 아키텍처", slug: "part9/multi-module" },
     ],
@@ -107,20 +106,20 @@ export const sidebars = [
       { label: "애니메이션", slug: "part10/animations" },
       { label: "접근성", slug: "part10/accessibility" },
       { label: "다국어 처리", slug: "part10/internationalization" },
-      { label: "퍼포먼스 튜닝", slug: "part10/performance" },
-      { label: "추천 패키지", slug: "part10/recommended-packages" },
+      { label: "성능 최적화", slug: "part10/performance" },
+      // { label: "추천 패키지", slug: "part10/recommended-packages" },
     ],
   },
   {
     label: "📚 부록",
     items: [
-      { label: "개발 도구와 링크", slug: "appendix/tools" },
+      // { label: "개발 도구와 링크", slug: "appendix/tools" },
       { label: "Flutter 오류 대응법", slug: "appendix/error-handling" },
       { label: "코드 템플릿", slug: "appendix/code-templates" },
-      { label: "FAQ", slug: "appendix/faq" },
       { label: "소셜 로그인", slug: "appendix/social-login" },
       { label: "iOS 라이브 액티비티", slug: "appendix/live-activities" },
       { label: "WidgetBook", slug: "appendix/widgetbook" },
+      { label: "FAQ", slug: "appendix/faq" },
     ],
   },
 ];

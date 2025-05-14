@@ -775,11 +775,6 @@ go_router는 다른 Flutter 라우팅 라이브러리에 비해 몇 가지 장�
 - **go_router**: 공식 지원, 간단한 설정, 코드 생성 불필요
 - **auto_route**: 코드 생성 기반, 타입 안전성, 더 많은 설정 필요
 
-### 3. go_router vs get
-
-- **go_router**: 공식 지원, Navigator 2.0 기반, URL 동기화 지원 강력
-- **get**: 더 넓은 기능 세트 (상태 관리, 종속성 주입 등), 더 단순한 API
-
 ## 요약
 
 - **go_router**는 Flutter 팀이 공식 지원하는 네비게이션 라이브러리로, Navigator 2.0의 기능을 더 쉽게 사용할 수 있게 해줍니다.

@@ -55,55 +55,7 @@ dependencies:
 flutter pub get
 ```
 
-#### 3. Android 설정
-
-Android에서 Crashlytics를 설정하려면 `android/app/build.gradle` 파일에 다음 플러그인을 추가해야 합니다:
-
-```gradle
-// app/build.gradle 파일
-dependencies {
-  // ... 기존 종속성
-  implementation 'com.google.firebase:firebase-crashlytics:18.4.0'
-  implementation 'com.google.firebase:firebase-analytics:21.3.0'
-}
-
-apply plugin: 'com.google.firebase.crashlytics'
-```
-
-그리고 프로젝트 수준의 `android/build.gradle` 파일에 다음 내용을 추가합니다:
-
-```gradle
-// project/build.gradle 파일
-buildscript {
-  repositories {
-    // ... 기존 저장소
-    google()
-  }
-  dependencies {
-    // ... 기존 종속성
-    classpath 'com.google.firebase:firebase-crashlytics-gradle:2.9.9'
-  }
-}
-```
-
-#### 4. iOS 설정
-
-iOS의 경우 `ios/Podfile`에 다음 내용을 추가합니다:
-
-```ruby
-target 'Runner' do
-  // ... 기존 내용
-  pod 'FirebaseCrashlytics'
-end
-```
-
-그리고 다음 명령어를 실행합니다:
-
-```bash
-cd ios && pod install --repo-update
-```
-
-#### 5. Flutter 앱에서 Crashlytics 초기화
+#### 3. Flutter 앱에서 Crashlytics 초기화
 
 앱의 메인 파일에서 Crashlytics를 초기화합니다:
 
@@ -259,7 +211,7 @@ pubspec.yaml에 다음 패키지를 추가합니다:
 
 ```yaml
 dependencies:
-  sentry_flutter: ^7.9.0
+  sentry_flutter: ^8.14.2
 ```
 
 패키지를 설치합니다:

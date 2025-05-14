@@ -22,7 +22,6 @@ Flutter 개발을 효과적으로 수행하기 위해서는 적절한 도구를 
 | **Awesome Flutter Snippets** | 자주 사용되는 Flutter 코드 조각 제공 |
 | **Flutter Widget Snippets**  | 위젯 코드 스니펫 제공                |
 | **Pubspec Assist**           | pubspec.yaml 파일 관리 도우미        |
-| **bloc**                     | Bloc 패턴 개발 지원                  |
 | **Git History**              | Git 이력 관리 시각화                 |
 | **Error Lens**               | 인라인 오류 하이라이팅               |
 
@@ -34,14 +33,6 @@ Flutter 개발을 효과적으로 수행하기 위해서는 적절한 도구를 
 | **Dart Observatory** | 메모리 및 CPU 프로파일링           | [문서](https://dart.dev/tools/dart-devtools)                |
 | **Flipper**          | Facebook의 모바일 앱 디버깅 플랫폼 | [웹사이트](https://fbflipper.com/)                          |
 | **Sentry**           | 실시간 에러 추적                   | [웹사이트](https://sentry.io/)                              |
-
-### UI 디자인 도구
-
-| 도구                      | 설명                     | 링크                                                             |
-| ------------------------- | ------------------------ | ---------------------------------------------------------------- |
-| **Figma**                 | 협업 기반 UI 디자인 도구 | [웹사이트](https://www.figma.com/)                               |
-| **Adobe XD**              | UI/UX 디자인 도구        | [웹사이트](https://www.adobe.com/products/xd.html)               |
-| **Flutter UI Challenges** | UI 구현 연습 프로젝트    | [GitHub](https://github.com/lohanidamodar/flutter_ui_challenges) |
 
 ### CI/CD 도구
 

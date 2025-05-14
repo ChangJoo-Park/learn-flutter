@@ -75,7 +75,7 @@ abstract class SocialLoginProvider {
 
 ```yaml
 dependencies:
-  kakao_flutter_sdk_user: ^1.6.0
+  kakao_flutter_sdk_user: ^1.9.7+3
 ```
 
 ### 2. 플랫폼별 설정
@@ -222,149 +222,11 @@ void main() {
 
 ```yaml
 dependencies:
-  flutter_naver_login: ^1.8.0
+  naver_login_sdk: ^3.0.0
 ```
 
-### 2. 플랫폼별 설정
+> 준비중입니다.
 
-#### Android 설정
-
-1. `android/app/src/main/res/values/strings.xml` 파일 생성 및 설정:
-
-```xml
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="client_id">${YOUR_CLIENT_ID}</string>
-    <string name="client_secret">${YOUR_CLIENT_SECRET}</string>
-    <string name="client_name">${YOUR_APP_NAME}</string>
-</resources>
-```
-
-2. `android/app/build.gradle` 파일의 `defaultConfig` 섹션에 매니페스트 플레이스홀더 추가:
-
-```gradle
-defaultConfig {
-    // ...
-    manifestPlaceholders += [
-        'naverClientId': '${YOUR_CLIENT_ID}',
-        'naverClientSecret': '${YOUR_CLIENT_SECRET}',
-        'naverClientName': '${YOUR_APP_NAME}'
-    ]
-}
-```
-
-3. `android/app/src/main/AndroidManifest.xml` 파일에 네이버 로그인 설정 추가:
-
-```xml
-<manifest ...>
-  <application ...>
-    <activity ...>
-      <!-- ... -->
-
-      <!-- 네이버 로그인 커스텀 URL 스킴 설정 -->
-      <intent-filter>
-        <action android:name="android.intent.action.VIEW" />
-        <category android:name="android.intent.category.DEFAULT" />
-        <category android:name="android.intent.category.BROWSABLE" />
-
-        <data android:scheme="naver${YOUR_CLIENT_ID}" android:host="oauth"/>
-      </intent-filter>
-    </activity>
-
-    <!-- 네이버 로그인 추가 설정 -->
-    <meta-data
-        android:name="com.naver.sdk.clientId"
-        android:value="@string/client_id" />
-    <meta-data
-        android:name="com.naver.sdk.clientSecret"
-        android:value="@string/client_secret" />
-    <meta-data
-        android:name="com.naver.sdk.clientName"
-        android:value="@string/client_name" />
-  </application>
-</manifest>
-```
-
-#### iOS 설정
-
-1. `ios/Runner/Info.plist` 파일에 네이버 설정 추가:
-
-```xml
-<key>CFBundleURLTypes</key>
-<array>
-  <!-- 기존 URL 스킴 설정 -->
-  <dict>
-    <key>CFBundleTypeRole</key>
-    <string>Editor</string>
-    <key>CFBundleURLSchemes</key>
-    <array>
-      <string>naver${YOUR_CLIENT_ID}</string>
-    </array>
-  </dict>
-</array>
-
-<key>LSApplicationQueriesSchemes</key>
-<array>
-  <!-- 기존 스킴 목록 -->
-  <string>naversearchapp</string>
-  <string>naversearchthirdlogin</string>
-</array>
-
-<key>naverClientId</key>
-<string>${YOUR_CLIENT_ID}</string>
-<key>naverClientSecret</key>
-<string>${YOUR_CLIENT_SECRET}</string>
-<key>naverServiceAppName</key>
-<string>${YOUR_APP_NAME}</string>
-```
-
-### 3. 네이버 로그인 구현
-
-```dart
-import 'package:flutter_naver_login/flutter_naver_login.dart';
-
-class NaverLoginProvider implements SocialLoginProvider {
-  @override
-  Future<SocialLoginResult> login() async {
-    try {
-      // 네이버 로그인 실행
-      NaverLoginResult result = await FlutterNaverLogin.logIn();
-
-      // 로그인 결과 확인
-      if (result.status == NaverLoginStatus.success) {
-        // 사용자 정보 가져오기
-        NaverAccessToken token = await FlutterNaverLogin.currentAccessToken;
-        NaverAccountResult account = await FlutterNaverLogin.currentAccount();
-
-        return SocialLoginResult.success(
-          accessToken: token.accessToken,
-          provider: 'naver',
-          email: account.email,
-          name: account.name,
-          profileImage: account.profileImage,
-        );
-      } else if (result.status == NaverLoginStatus.cancelledByUser) {
-        return const SocialLoginResult.cancelled(provider: 'naver');
-      } else {
-        return SocialLoginResult.error(
-          message: '네이버 로그인 실패: ${result.errorMessage}',
-          provider: 'naver',
-        );
-      }
-    } catch (error) {
-      return SocialLoginResult.error(
-        message: error.toString(),
-        provider: 'naver',
-      );
-    }
-  }
-
-  @override
-  Future<void> logout() async {
-    await FlutterNaverLogin.logOut();
-  }
-}
-```
 
 ## 애플 로그인 구현
 
