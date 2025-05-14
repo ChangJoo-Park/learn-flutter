@@ -1,5 +1,5 @@
 ---
-title: Stateless / Stateful 위젯
+title: Stateless / Stateful 위젯 상세
 ---
 
 Flutter에서 위젯은 크게 Stateless 위젯과 Stateful 위젯으로 구분됩니다. 이 두 가지 위젯 유형은 UI 구성의 기본 요소이며, 각각 다른 용도와 특성을 가지고 있습니다. 이 장에서는 두 위젯의 차이점, 동작 원리, 사용 패턴에 대해 알아보겠습니다.

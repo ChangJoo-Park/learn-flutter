@@ -12,7 +12,6 @@ Flutter 개발을 효과적으로 수행하기 위해서는 적절한 도구를 
 | ------------------ | --------------------------------------------------------------- | ------------------------------------------------ |
 | **VS Code**        | 가벼운 에디터로 Flutter 확장 프로그램 지원                      | [다운로드](https://code.visualstudio.com/)       |
 | **Android Studio** | Google의 공식 Android 개발 IDE, 전문적인 Flutter 개발 환경 제공 | [다운로드](https://developer.android.com/studio) |
-| **IntelliJ IDEA**  | JetBrains의 강력한 IDE, Flutter 플러그인 지원                   | [다운로드](https://www.jetbrains.com/idea/)      |
 
 ### VS Code 필수 확장 프로그램
 
@@ -74,15 +73,6 @@ Flutter 개발을 효과적으로 수행하기 위해서는 적절한 도구를 
 | **Flutter Awesome**   | 큐레이션된 패키지 및 가이드   | [링크](https://flutterawesome.com/)          |
 | **Flutter Force**     | 뉴스레터 및 팁                | [링크](https://twitter.com/flutterforce)     |
 
-### 한국어 자료
-
-| 리소스                    | 설명                    | 링크                                                             |
-| ------------------------- | ----------------------- | ---------------------------------------------------------------- |
-| **Flutter 한국 커뮤니티** | 네이버 카페             | [링크](https://cafe.naver.com/fluttercommunity)                  |
-| **Flutter Korea**         | Facebook 그룹           | [링크](https://www.facebook.com/groups/flutterkorea/)            |
-| **개발자 김성규 블로그**  | Flutter 튜토리얼 및 팁  | [링크](https://velog.io/@adbr)                                   |
-| **코딩파파 유튜브**       | 한국어 Flutter 튜토리얼 | [링크](https://www.youtube.com/channel/UCUH2DSbsNUz2sW3kBNn4ibw) |
-
 ### 영상 자료
 
 | 리소스                  | 설명                      | 링크                                               |
@@ -134,7 +124,3 @@ Flutter 개발을 효과적으로 수행하기 위해서는 적절한 도구를 
 | **Dart Analyzer**  | 코드 정적 분석 도구     | [문서](https://dart.dev/guides/language/analysis-options) |
 | **Effective Dart** | Dart 코딩 스타일 가이드 | [문서](https://dart.dev/guides/language/effective-dart)   |
 | **Flutter Lints**  | 권장 린트 규칙          | [패키지](https://pub.dev/packages/flutter_lints)          |
-| **SonarQube**      | 지속적인 코드 품질 검사 | [웹사이트](https://www.sonarqube.org/)                    |
-| **Codecov**        | 코드 커버리지 리포팅    | [웹사이트](https://codecov.io/)                           |
-
-이 목록은 Flutter 개발에 유용한 도구와 자료의 일부일 뿐입니다. Flutter 생태계는 지속적으로 성장하고 있으며, 새로운 도구와 자료가 계속 등장하고 있습니다. 정기적으로 공식 블로그와 커뮤니티를 확인하여 최신 정보를 얻는 것이 좋습니다.

@@ -25,7 +25,7 @@ export const sidebars = [
     label: "🧱 Part 3. Flutter의 기본 구성 요소",
     items: [
       { label: "위젯 개념과 주요 위젯", slug: "part3/widgets" },
-      { label: "Stateless / Stateful 위젯", slug: "part3/stateless-stateful" },
+      { label: "Stateless / Stateful 위젯 상세", slug: "part3/stateless-stateful" },
       { label: "Widget Tree 이해", slug: "part3/widget-tree" },
       { label: "주요 위젯", slug: "part3/basic-widgets" },
       { label: "레이아웃 위젯", slug: "part3/layout-widgets" },
