@@ -1,5 +1,6 @@
 import { rehypeMermaid } from "@beoe/rehype-mermaid";
 import { getCache } from "@beoe/cache";
+import starlightGiscus from 'starlight-giscus'
 const googleAnalyticsId = 'G-FTYYK8J5MY'
 
 const cache = await getCache();
@@ -27,7 +28,11 @@ export default defineConfig({
       plugins: [pluginLineNumbers()],
     }),
     starlight({
+      credits: true,
       title: "Flutter 배우기",
+      customCss: [
+        './src/styles/custom.css',
+      ],
       head: [
         // Adding google analytics
         {
@@ -64,6 +69,18 @@ export default defineConfig({
         starlightLlmsTxt({
           projectName: "Flutter 배우기",
         }),
+        starlightGiscus({
+          repo: 'changjoo-park/learn-flutter',
+          repoId: 'R_kgDOOpJgKQ',
+          category: 'Q&A',
+          categoryId: 'DIC_kwDOOpJgKc4CqIHA',
+          inputPosition: 'top',
+          mapping: 'pathname',
+          reactionsEnabled: true,
+          emitMetadata: true,
+          theme: 'preferred_color_scheme',
+          lang: 'ko',
+        })
       ],
     }),
   ],
