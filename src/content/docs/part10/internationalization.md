@@ -1,19 +1,11 @@
-# 다국어 처리
+---
+title: 다국어 지원
+---
 
 글로벌 시장에서 앱의 경쟁력을 높이기 위해서는 다양한 언어와 지역 설정을 지원하는 것이 중요합니다. Flutter는 `flutter_localizations` 패키지와 `intl` 패키지를 통해 앱의 다국어 처리(internationalization)와 지역화(localization)를 지원합니다.
 
 ## 다국어 처리의 중요성
 
-```mermaid
-graph TD
-    A[다국어 지원] --> B[글로벌 사용자 기반 확대]
-    A --> C[사용자 경험 향상]
-    A --> D[앱 스토어 노출 증가]
-    A --> E[현지 시장 경쟁력 강화]
-
-    style A fill:#f9d5e5
-    style C fill:#d5e5f9
-```
 
 사용자의 언어로 앱을 제공하면 다음과 같은 장점이 있습니다:
 

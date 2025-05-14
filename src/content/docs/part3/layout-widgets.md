@@ -1,17 +1,12 @@
-# 레이아웃 위젯
+---
+title: 레이아웃 위젯
+---
 
 Flutter에서 레이아웃 위젯은 화면에 UI 요소를 배치하고 구성하는 데 사용됩니다. 이 장에서는 Flutter의 다양한 레이아웃 위젯과 그 사용법, 그리고 복잡한 레이아웃을 구성하는 방법에 대해 알아보겠습니다.
 
 ## Flutter의 레이아웃 시스템
 
 Flutter의 레이아웃 시스템은 위젯 트리를 통해 UI를 구성하며, 부모 위젯이 자식 위젯에게 제약 조건(constraints)을 전달하고 자식 위젯이 이 제약 내에서 자신의 크기를 결정하는 방식으로 작동합니다.
-
-```mermaid
-flowchart TD
-    A[부모 위젯] -->|1. 제약 조건 전달| B[자식 위젯]
-    B -->|2. 크기 결정| B
-    B -->|3. 위치 보고| A
-```
 
 Flutter의 레이아웃 프로세스:
 
@@ -196,29 +191,6 @@ Column(
 - `crossAxisAlignment`: 교차축을 따라 자식 위젯을 정렬
 - `mainAxisSize`: 주축 방향으로 차지할 공간 (기본값: `MainAxisSize.max`)
 
-#### MainAxisAlignment 옵션
-
-```mermaid
-graph TD
-    A[MainAxisAlignment] --> B[start<br>좌측/상단 정렬]
-    A --> C[center<br>가운데 정렬]
-    A --> D[end<br>우측/하단 정렬]
-    A --> E[spaceBetween<br>첫/끝 위젯은 양끝, 나머지는 동일 간격]
-    A --> F[spaceAround<br>모든 주변에 동일 간격, 위젯 간 간격은 2배]
-    A --> G[spaceEvenly<br>모든 간격이 동일]
-```
-
-#### CrossAxisAlignment 옵션
-
-```mermaid
-graph TD
-    A[CrossAxisAlignment] --> B[start<br>좌측/상단 정렬]
-    A --> C[center<br>가운데 정렬]
-    A --> D[end<br>우측/하단 정렬]
-    A --> E[stretch<br>교차축으로 확장]
-    A --> F[baseline<br>텍스트 기준선 정렬]
-```
-
 ### Expanded와 Flexible
 
 `Expanded`와 `Flexible`은 자식 위젯이 Row나 Column 내에서 사용 가능한 공간을 차지하도록 합니다:
@@ -382,17 +354,6 @@ Stack(
 ```
 
 다음은 Stack과 Positioned의 레이아웃 방식을 보여주는 다이어그램입니다:
-
-```mermaid
-graph TD
-    A[Stack] --> B[기본 자식]
-    A --> C[Positioned<br>자식 1]
-    A --> D[Positioned<br>자식 2]
-
-    B -.-> E["(기본 정렬 - alignment)"]
-    C -.-> F["(명시적 위치 - top, left 등)"]
-    D -.-> G["(명시적 위치 - bottom, right 등)"]
-```
 
 ## 스크롤 위젯
 
@@ -855,33 +816,6 @@ Column _buildStatColumn(String label, String value) {
 ```
 
 위젯 구조:
-
-```mermaid
-graph TD
-    A[Scaffold] --> B[AppBar]
-    A --> C[SingleChildScrollView]
-    C --> D[Column]
-    D --> E[프로필 헤더<br>Container + Stack]
-    D --> F[통계 섹션<br>Row]
-    D --> G[Divider]
-    D --> H[소개 섹션<br>Padding + Column]
-    D --> I[Divider]
-    D --> J[갤러리 섹션<br>GridView]
-
-    E --> E1[배경 이미지]
-    E --> E2[프로필 정보<br>Positioned]
-    E2 --> E3[Row: 아바타 + 정보 + 버튼]
-
-    F --> F1[게시물 통계]
-    F --> F2[팔로워 통계]
-    F --> F3[팔로잉 통계]
-
-    H --> H1[제목 텍스트]
-    H --> H2[소개 텍스트]
-
-    J --> J1[갤러리 제목]
-    J --> J2[이미지 그리드]
-```
 
 ## 레이아웃 디버깅
 

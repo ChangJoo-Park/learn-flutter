@@ -1,4 +1,6 @@
-# Android / iOS 배포 절차
+---
+title: Android / iOS 배포 절차
+---
 
 Flutter 앱을 개발한 후 사용자들에게 제공하기 위해 앱 스토어에 배포하는 절차를 알아봅니다. Android와 iOS 플랫폼은 각각 다른 배포 프로세스를 가지고 있습니다.
 

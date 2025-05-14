@@ -1,4 +1,6 @@
-# WidgetBook을 활용한 Flutter UI 문서화
+---
+title: WidgetBook을 활용한 Flutter UI 문서화
+---
 
 Flutter 애플리케이션을 개발할 때 일관된 디자인 시스템을 유지하고 UI 컴포넌트를 문서화하는 것은 중요합니다. WidgetBook은 Flutter 위젯을 카탈로그화하고 대화형으로 테스트할 수 있는 도구로, Storybook이나 Styleguidist와 같은 웹 개발 도구에서 영감을 받았습니다. 이 문서에서는 WidgetBook을 설정하고 효과적으로 활용하는 방법에 대해 알아보겠습니다.
 

@@ -2,7 +2,6 @@ export const sidebars = [
   {
     label: "📦 Part 1. 시작하기",
     items: [
-      { label: "Flutter 소개 및 특징", slug: "part1/introduction" },
       { label: "개발 환경 구성", slug: "part1/setup" },
       { label: "첫 프로젝트 생성 및 실행", slug: "part1/first-project" },
       { label: "Flutter 프로젝트 구조 이해", slug: "part1/project-structure" },
@@ -77,30 +76,27 @@ export const sidebars = [
       { label: "단위 테스트", slug: "part7/unit-test" },
       { label: "위젯 테스트", slug: "part7/widget-test" },
       { label: "통합 테스트", slug: "part7/integration-test" },
-      { label: "mockito, golden test, coverage", slug: "part7/testing-tools" },
-      { label: "Flutter DevTools", slug: "part7/devtools" },
-      { label: "로그 관리", slug: "part7/logging" },
+      // { label: "Flutter DevTools", slug: "part7/devtools" },
+      // { label: "로그 관리", slug: "part7/logging" },
     ],
   },
   {
     label: "🚀 Part 8. 앱 배포 및 운영",
     items: [
       { label: "빌드 모드", slug: "part8/build-modes" },
-      { label: "Android / iOS 배포", slug: "part8/deployment" },
-      { label: "Codemagic CI/CD", slug: "part8/codemagic" },
-      { label: "환경 분리 및 flavor", slug: "part8/flavors" },
-      { label: "사용자 분석 도구", slug: "part8/analytics" },
+      { label: "Android / iOS 배포", slug: "part8/deploy-procedure" },
+      { label: "Codemagic CI/CD", slug: "part8/cicd-codemagic" },
+      { label: "환경 분리 및 flavor", slug: "part8/environment-flavors" },
+      { label: "사용자 분석 도구", slug: "part8/analytics-tools" },
       { label: "에러 추적", slug: "part8/error-tracking" },
     ],
   },
   {
     label: "🧭 Part 9. 프로젝트 구조 & 아키텍처",
     items: [
-      { label: "폴더 구조", slug: "part9/folder-structure" },
-      { label: "의존성 주입", slug: "part9/dependency-injection" },
-      { label: "패키지 작성 및 관리", slug: "part9/package-management" },
-      { label: "모노레포 구조", slug: "part9/monorepo" },
-      { label: "Flutter 코드 스타일", slug: "part9/code-style" },
+      { label: "클린 아키텍처", slug: "part9/clean-architecture" },
+      { label: "기능별 vs 계층별 폴더 구조", slug: "part9/folder-structure" },
+      { label: "멀티 모듈 아키텍처", slug: "part9/multi-module" },
     ],
   },
   {

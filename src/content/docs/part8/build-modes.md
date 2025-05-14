@@ -1,26 +1,12 @@
-# 빌드 모드 (debug / profile / release)
+---
+title: 빌드 모드 (debug / profile / release)
+---
 
 Flutter는 세 가지 주요 빌드 모드를 제공합니다. 각 모드는 개발 과정의 다른 단계에서 사용되며, 각기 다른 최적화와 기능을 제공합니다.
 
 ## 빌드 모드 개요
 
 Flutter의 빌드 모드는 다음과 같습니다:
-
-```mermaid
-graph TD
-    A[Flutter 빌드 모드] --> B[Debug 모드]
-    A --> C[Profile 모드]
-    A --> D[Release 모드]
-    B --> B1[개발 중 사용]
-    B --> B2[Hot Reload/Restart 지원]
-    B --> B3[디버깅 정보 포함]
-    C --> C1[성능 프로파일링용]
-    C --> C2[일부 디버깅 기능 비활성화]
-    C --> C3[실제 기기 성능 측정]
-    D --> D1[최종 배포용]
-    D --> D2[최적화 및 최소화]
-    D --> D3[모든 디버깅 기능 비활성화]
-```
 
 ## Debug 모드
 

@@ -1,44 +1,12 @@
-# 주요 위젯
+---
+title: 주요 위젯
+---
 
 Flutter는 다양한 UI 요소를 구현하기 위한 풍부한 위젯 세트를 제공합니다. 이 장에서는 Flutter 앱을 구축할 때 자주 사용되는 핵심 위젯들을 살펴보겠습니다.
 
 ## 위젯 카테고리
 
 Flutter 위젯은 기능과 용도에 따라 다양한 카테고리로 분류할 수 있습니다:
-
-```mermaid
-graph TD
-    A[Flutter 위젯] --> B[디스플레이 위젯]
-    A --> C[입력 위젯]
-    A --> D[레이아웃 위젯]
-    A --> E[네비게이션 위젯]
-    A --> F[정보 위젯]
-    A --> G[컨테이너 위젯]
-
-    B --> B1[Text]
-    B --> B2[Image]
-    B --> B3[Icon]
-
-    C --> C1[TextField]
-    C --> C2[Checkbox/Radio]
-    C --> C3[Button]
-
-    D --> D1[Container]
-    D --> D2[Row/Column]
-    D --> D3[Stack]
-
-    E --> E1[AppBar]
-    E --> E2[Drawer]
-    E --> E3[BottomNavigationBar]
-
-    F --> F1[SnackBar]
-    F --> F2[Dialog]
-    F --> F3[ProgressIndicator]
-
-    G --> G1[Card]
-    G --> G2[ListTile]
-    G --> G3[Scaffold]
-```
 
 이 장에서는 기본적인 디스플레이, 입력, 컨테이너 위젯을 중점적으로 살펴보겠습니다. 레이아웃 위젯은 다음 장에서 자세히 다룰 예정입니다.
 
@@ -688,40 +656,6 @@ Card(
 
 위젯 트리:
 
-```mermaid
-graph TD
-    A[Card] --> B[Padding]
-    B --> C[Column]
-    C --> D[Row: 프로필 정보]
-    C --> E[SizedBox]
-    C --> F[Text: 소개]
-    C --> G[SizedBox]
-    C --> H[Wrap: 기술 태그]
-    C --> I[SizedBox]
-    C --> J[Row: 통계]
-    C --> K[SizedBox]
-    C --> L[Row: 버튼]
-
-    D --> D1[CircleAvatar]
-    D --> D2[SizedBox]
-    D --> D3[Expanded/Column]
-    D --> D4[IconButton]
-
-    D3 --> D31[Text: 이름]
-    D3 --> D32[Text: 직업]
-
-    H --> H1[Chip: Flutter]
-    H --> H2[Chip: Dart]
-    H --> H3[Chip: Firebase]
-
-    J --> J1[Column: 게시물]
-    J --> J2[Column: 팔로워]
-    J --> J3[Column: 팔로잉]
-
-    L --> L1[Expanded/ElevatedButton]
-    L --> L2[SizedBox]
-    L --> L3[OutlinedButton]
-```
 
 ## 위젯 사용 팁
 

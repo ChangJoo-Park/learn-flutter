@@ -1,4 +1,6 @@
-# 통합 테스트
+---
+title: 통합 테스트
+---
 
 통합 테스트(Integration Test)는 앱의 다양한 부분들이 함께 작동하는 방식을 검증하는 테스트입니다. 단위 테스트가 작은 코드 조각을, 위젯 테스트가 UI 컴포넌트를 검증한다면, 통합 테스트는 실제 디바이스나 에뮬레이터에서 앱 전체의 동작을 확인합니다.
 
@@ -13,25 +15,6 @@
 5. **백엔드 연동 검증**: 실제 또는 테스트용 백엔드와의 통합 작동을 검증합니다.
 
 ## 테스트 종류별 특징
-
-```mermaid
-graph TD
-    A[테스트 종류] --> B[단위 테스트]
-    A --> C[위젯 테스트]
-    A --> D[통합 테스트]
-
-    B --> B1[작은 코드 단위 검증]
-    B --> B2[빠르게 실행]
-    B --> B3[낮은 유지보수 비용]
-
-    C --> C1[UI 컴포넌트 검증]
-    C --> C2[중간 속도로 실행]
-    C --> C3[중간 수준의 유지보수 비용]
-
-    D --> D1[앱 전체 흐름 검증]
-    D --> D2[느리게 실행]
-    D --> D3[높은 유지보수 비용]
-```
 
 ## 통합 테스트 설정
 
@@ -317,30 +300,6 @@ testWidgets('사용자 로그인 및 데이터 조회 흐름', (WidgetTester tes
 ## 테스트 실행 구조
 
 통합 테스트가 실행되는 방식을 이해하면 디버깅에 도움이 됩니다:
-
-```mermaid
-sequenceDiagram
-    participant Dev as 개발자
-    participant Test as integration_test
-    participant Driver as Flutter Driver
-    participant App as 앱(실제 기기/에뮬레이터)
-
-    Dev->>Test: 통합 테스트 실행
-    Test->>Driver: 초기화
-    Driver->>App: 앱 실행
-    Note over App: 앱 시작 및 초기화
-    App-->>Driver: 준비 완료
-
-    loop 테스트 단계
-        Test->>Driver: 위젯 찾기/상호작용 명령
-        Driver->>App: 명령 전달
-        App-->>Driver: 결과 반환
-        Driver-->>Test: 결과 전달
-        Test->>Test: 검증(expect)
-    end
-
-    Test-->>Dev: 테스트 결과 보고
-```
 
 ## 통합 테스트 모범 사례
 

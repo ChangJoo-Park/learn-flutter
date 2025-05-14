@@ -1,4 +1,6 @@
-# Riverpod 소개 및 실습
+---
+title: Riverpod 소개 및 실습
+---
 
 Riverpod는 Flutter 앱에서 상태 관리를 위한 현대적인 솔루션으로, Provider 패키지의 다음 단계 진화형입니다. Provider의 창시자인 Remi Rousselet이 개발한 이 라이브러리는 Provider의 장점을 유지하면서 몇 가지 핵심적인 문제점을 해결합니다. 이 장에서는 Riverpod의 개념, 장점, 그리고 실제 사용법에 대해 알아보겠습니다.
 
@@ -6,14 +8,6 @@ Riverpod는 Flutter 앱에서 상태 관리를 위한 현대적인 솔루션으�
 
 Riverpod는 "Provider"의 애너그램(글자를 재배열한 단어)으로, Provider의 제한사항을 해결하기 위해 처음부터 다시 설계된 상태 관리 라이브러리입니다. Provider가 InheritedWidget을 기반으로 하는 반면, Riverpod는 위젯 트리와 완전히 독립적으로 작동합니다.
 
-```mermaid
-graph TD
-    A[Riverpod] --> B[컴파일 타임<br>안전성]
-    A --> C[위젯 트리<br>독립성]
-    A --> D[캐싱 및<br>중복 제거]
-    A --> E[강력한<br>비동기 지원]
-    A --> F[의존성<br>오버라이드]
-```
 
 ### Riverpod vs Provider
 
@@ -163,14 +157,6 @@ Riverpod에서는 두 가지 핵심 개념이 있습니다:
 1. **Provider**: 상태를 정의하고 외부에 노출하는 객체
 2. **ref**: Provider에 접근하고 상호 작용하는 객체
 
-```mermaid
-graph LR
-    A[Provider] <--> B[ref]
-    A --> C[상태 정의/노출]
-    B --> D[상태 접근/조작]
-    B --> E[다른 Provider 접근]
-    B --> F[수명주기 관리]
-```
 
 ### Riverpod의 자동 의존성 처리
 

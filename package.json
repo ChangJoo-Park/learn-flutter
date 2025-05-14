@@ -8,13 +8,18 @@
     "build": "astro build",
     "preview": "astro preview",
     "upgrade": "npx @astrojs/upgrade",
+    "postinstall": "playwright install chromium",
     "astro": "astro"
   },
   "dependencies": {
     "@astrojs/starlight": "^0.34.3",
+    "@beoe/cache": "^0.1.1",
+    "@beoe/rehype-mermaid": "^0.4.2",
     "@expressive-code/plugin-line-numbers": "^0.41.2",
     "astro": "^5.7.12",
     "astro-expressive-code": "^0.41.2",
+    "playwright": "^1.52.0",
+    "rehype-mermaid": "^3.0.0",
     "sharp": "^0.32.5"
   }
 }

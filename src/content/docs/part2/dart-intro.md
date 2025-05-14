@@ -1,4 +1,6 @@
-# Dart 소개
+---
+title: Dart 소개
+---
 
 ## Dart란 무엇인가?
 

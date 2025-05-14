@@ -1,4 +1,6 @@
-# InheritedWidget과 Provider
+---
+title: InheritedWidget과 Provider
+---
 
 이 장에서는 Flutter의 위젯 트리를 통해 상태를 공유하는 방법인 `InheritedWidget`과 이를 기반으로 한 `Provider` 패키지에 대해 알아보겠습니다. 이 방식들은 상태 관리를 위한 중요한 도구로, 위젯 트리 전체에 걸쳐 데이터를 효율적으로 공유할 수 있게 해줍니다.
 
@@ -7,19 +9,6 @@
 `InheritedWidget`은 Flutter 프레임워크에 내장된 위젯으로, 위젯 트리의 하위 항목들에게 데이터를 효율적으로 전달할 수 있게 합니다. 특히 위젯 트리 깊숙한 곳에 있는 위젯이 상위 위젯의 데이터에 접근해야 할 때 매우 유용합니다.
 
 ### InheritedWidget의 작동 원리
-
-```mermaid
-graph TD
-    A[InheritedWidget] --> B[Child 1]
-    A --> C[Child 2]
-    B --> D[Grandchild 1]
-    B --> E[Grandchild 2]
-    C --> F[Grandchild 3]
-
-    D -.->|"of(context)"| A
-    E -.->|"of(context)"| A
-    F -.->|"of(context)"| A
-```
 
 1. **데이터 저장**: InheritedWidget은 공유하려는 데이터를 저장합니다.
 2. **위젯 트리 전파**: 이 데이터는 위젯 트리 아래로 자동으로 전파됩니다.
@@ -146,16 +135,6 @@ dependencies:
 ### Provider의 종류
 
 Provider 패키지는 다양한 종류의 Provider를 제공합니다:
-
-```mermaid
-graph TD
-    A[Provider] --> B[기본 Provider<br>읽기 전용 데이터]
-    A --> C[ChangeNotifierProvider<br>mutable 상태]
-    A --> D[FutureProvider<br>비동기 데이터]
-    A --> E[StreamProvider<br>스트림 데이터]
-    A --> F[ProxyProvider<br>다른 Provider 의존]
-    A --> G[MultiProvider<br>여러 Provider 조합]
-```
 
 1. **Provider**: 가장 기본적인 Provider로, 변경되지 않는 데이터를 제공
 2. **ChangeNotifierProvider**: ChangeNotifier를 사용하여 변경 가능한 상태를 관리

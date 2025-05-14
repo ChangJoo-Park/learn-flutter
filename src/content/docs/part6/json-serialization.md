@@ -1,4 +1,6 @@
-# JSON 직렬화 (freezed, json_serializable)
+---
+title: JSON 직렬화 (freezed, json_serializable)
+---
 
 REST API와 통신할 때 JSON 형식의 데이터를 주고받는 경우가 많습니다. Flutter/Dart에서는 이러한 JSON 데이터를 Dart 객체로 변환하고, 반대로 Dart 객체를 JSON으로 직렬화하는 과정이 필요합니다. 이 장에서는 `json_serializable`과 `freezed` 패키지를 활용한 JSON 직렬화 방법을 살펴보겠습니다.
 

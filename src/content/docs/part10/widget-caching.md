@@ -1,25 +1,12 @@
-# 위젯 캐싱
+---
+title: 위젯 캐싱
+---
 
 Flutter 앱의 성능을 최적화하는 데 있어 중요한 측면 중 하나는 불필요한 위젯 재구성(rebuild)과 재그리기(repaint)를 최소화하는 것입니다. 이번 장에서는 Flutter에서 위젯을 효율적으로 캐싱하고 렌더링 성능을 향상시키는 다양한 기법에 대해 알아보겠습니다.
 
 ## 불필요한 재구성 문제 이해하기
 
 Flutter의 선언적 UI 모델에서는 상태가 변경될 때마다 `build` 메서드가 호출되어 위젯 트리를 재구성합니다. 이 과정은 다음과 같은 문제를 야기할 수 있습니다:
-
-```mermaid
-graph TD
-    A[상태 변경] --> B[build 메서드 호출]
-    B --> C[위젯 트리 재구성]
-    C --> D[Element 트리 업데이트]
-    D --> E[RenderObject 트리 업데이트]
-    E --> F[레이아웃 계산]
-    F --> G[화면 다시 그리기]
-
-    style B fill:#f9d5e5
-    style C fill:#f9d5e5
-    style F fill:#d5e5f9
-    style G fill:#d5e5f9
-```
 
 1. **성능 저하**: 복잡한 위젯 트리를 자주 재구성하면 프레임 드롭이 발생할 수 있습니다.
 2. **불필요한 계산**: 변경되지 않은 위젯도 재구성될 수 있습니다.
@@ -31,14 +18,6 @@ graph TD
 
 ### RepaintBoundary 작동 원리
 
-```mermaid
-graph LR
-    A[Parent Widget] --> B[RepaintBoundary]
-    B --> C[Child Widget]
-
-    D[Parent 변경] --> E[Parent만 다시 그리기]
-    F[Child 변경] --> G[Child만 다시 그리기]
-```
 
 `RepaintBoundary`는 자식 위젯을 별도의 레이어로 분리합니다:
 

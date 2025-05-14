@@ -1,4 +1,6 @@
-# Drawer, BottomNavigationBar, TabBar
+---
+title: Drawer, BottomNavigationBar, TabBar
+---
 
 Flutter에서는 사용자 경험을 개선하기 위한 다양한 네비게이션 위젯을 제공합니다. 이 장에서는 가장 널리 사용되는 세 가지 네비게이션 패턴인 Drawer, BottomNavigationBar, TabBar에 대해 자세히 알아보고, go_router와 함께 이들을 효과적으로 구현하는 방법을 살펴보겠습니다.
 

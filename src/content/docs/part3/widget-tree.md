@@ -1,23 +1,12 @@
-# Widget Tree 이해
+---
+title: Widget Tree 이해
+---
 
 Flutter의 UI는 위젯 트리(Widget Tree)라고 불리는 계층 구조로 구성됩니다. 이 장에서는 위젯 트리의 개념, 작동 방식, 그리고 Flutter가 위젯 트리를 통해 효율적으로 UI를 렌더링하는 방법에 대해 알아보겠습니다.
 
 ## 위젯 트리란?
 
 위젯 트리는 Flutter 애플리케이션의 UI를 구성하는 위젯들의 계층적 구조입니다. 모든 Flutter 앱은 루트 위젯에서 시작하여 중첩된 자식 위젯들로 이루어진 트리 형태를 가집니다.
-
-```mermaid
-graph TD
-    A[MaterialApp] --> B[Scaffold]
-    B --> C[AppBar]
-    B --> D[Body: Container]
-    D --> E[Column]
-    E --> F[Text]
-    E --> G[Button]
-    E --> H[Image]
-    B --> I[Drawer]
-    B --> J[BottomNavigationBar]
-```
 
 ## 위젯 트리의 중요성
 
@@ -36,32 +25,6 @@ Flutter의 렌더링 과정은 세 가지 트리로 이루어집니다:
 2. **요소 트리(Element Tree)**: 위젯 트리의 런타임 표현으로, 위젯과 렌더 객체를 연결하는 가변(mutable) 트리
 3. **렌더 트리(Render Tree)**: 실제 화면에 그리기를 담당하는 객체들의 트리
 
-```mermaid
-graph TD
-    subgraph "위젯 계층"
-    A1[MyApp Widget] --> B1[HomePage Widget]
-    B1 --> C1[Container Widget]
-    C1 --> D1[Text Widget]
-    end
-
-    subgraph "요소 계층"
-    A2[MyApp Element] --> B2[HomePage Element]
-    B2 --> C2[Container Element]
-    C2 --> D2[Text Element]
-    end
-
-    subgraph "렌더 계층"
-    C3[RenderBox] --> D3[RenderParagraph]
-    end
-
-    A1 -.-> A2
-    B1 -.-> B2
-    C1 -.-> C2
-    D1 -.-> D2
-
-    C2 -.-> C3
-    D2 -.-> D3
-```
 
 ### 1. 위젯 트리 (Widget Tree)
 
@@ -112,21 +75,6 @@ MaterialApp(
 
 Flutter가 위젯 트리를 화면에 렌더링하는 과정은 다음과 같습니다:
 
-```mermaid
-sequenceDiagram
-    participant App
-    participant WidgetTree
-    participant ElementTree
-    participant RenderTree
-    participant Screen
-
-    App->>WidgetTree: 위젯 생성
-    WidgetTree->>ElementTree: 요소 생성/업데이트
-    ElementTree->>RenderTree: 렌더 객체 생성/업데이트
-    RenderTree->>RenderTree: 레이아웃 계산
-    RenderTree->>RenderTree: 페인팅
-    RenderTree->>Screen: 화면에 표시
-```
 
 1. **위젯 생성**: 개발자가 작성한 코드에 따라 위젯 트리가 생성됩니다.
 2. **요소 생성/업데이트**: 각 위젯에 대응하는 요소가 생성되거나 업데이트됩니다.
@@ -138,17 +86,6 @@ sequenceDiagram
 ## BuildContext
 
 `BuildContext`는 위젯 트리에서 위젯의 위치를 나타내는 객체입니다. 실제로는 요소 트리의 요소(Element)를 참조합니다.
-
-```mermaid
-graph TD
-    A[MaterialApp] --> B[Scaffold]
-    B --> C[AppBar]
-    B --> D[Container]
-    D --> E[Text]
-
-    D -.->|"BuildContext of Container"| D
-    E -.->|"BuildContext of Text"| E
-```
 
 BuildContext의 주요 용도:
 
@@ -178,18 +115,6 @@ ElevatedButton(
 
 Flutter는 위젯 트리가 변경될 때 효율적으로 UI를 업데이트하기 위해 "재조정(reconciliation)" 과정을 수행합니다:
 
-```mermaid
-graph TD
-    A[상태 변경] --> B[새 위젯 트리 생성]
-    B --> C[기존 요소 트리와 비교]
-    C --> D{위젯 타입 동일?}
-    D -->|Yes| E[요소 유지, 속성 업데이트]
-    D -->|No| F[이전 요소 폐기, 새 요소 생성]
-    E --> G[자식 위젯 재조정]
-    F --> G
-    G --> H[렌더 트리 업데이트]
-    H --> I[화면 업데이트]
-```
 
 ### 키워드: 동일성과 동등성
 
@@ -208,18 +133,6 @@ Flutter는 다음 규칙을 사용하여 위젯을 비교합니다:
 
 키는 Flutter가 위젯을 식별하는 데 사용되는 식별자입니다. 특히 동적 위젯(리스트, 그리드 등)에서 중요합니다.
 
-```mermaid
-graph TD
-    subgraph "키가 없는 경우"
-    A1[List: A, B, C] --> A2[List: B, C]
-    A2 -->|"위젯 비교: A → B, B → C"| A3[요소 재사용]
-    end
-
-    subgraph "키가 있는 경우"
-    B1[List: A(key:1), B(key:2), C(key:3)] --> B2[List: B(key:2), C(key:3)]
-    B2 -->|"키 비교: key:1 삭제"| B3[정확한 요소 제거]
-    end
-```
 
 키가 중요한 상황:
 
@@ -292,21 +205,10 @@ graph TD
 
 ### 키 없이 리스트 항목 제거
 
-```mermaid
-graph TD
-    A[원래 리스트: A, B, C] --> B["항목 제거 후: A, C"]
-    B --> C["위젯 비교: A → A, B → C (상태 혼동)"]
-```
 
 키가 없으면 Flutter는 위치 기반으로 위젯을 비교합니다. 첫 번째 위젯 A는 그대로 유지되고, 두 번째 위치에 있던 B는 C로 업데이트됩니다. 이로 인해 상태가 예상치 않게 섞일 수 있습니다.
 
 ### 키를 사용한 리스트 항목 제거
-
-```mermaid
-graph TD
-    A["원래 리스트: A(key:1), B(key:2), C(key:3)"] --> B["항목 제거 후: A(key:1), C(key:3)"]
-    B --> C["키 비교: key:1 유지, key:2 제거, key:3 유지 (상태 일관성)"]
-```
 
 키를 사용하면 Flutter는 키를 기반으로 위젯을 식별합니다. B(key:2)가 제거되고 A와 C는 키를 통해 정확히 식별되어 상태가 올바르게 유지됩니다.
 
@@ -423,32 +325,6 @@ class UserHeaderWidget extends StatelessWidget {
 ```
 
 위 코드의 위젯 트리 구조:
-
-```mermaid
-graph TD
-    A[ProfileScreen] --> B[Scaffold]
-    B --> C[AppBar]
-    C --> C1[Text: '프로필']
-    C --> C2[IconButton]
-    B --> D[SingleChildScrollView]
-    D --> E[Column]
-    E --> F[UserHeaderWidget]
-    F --> F1[Container]
-    F1 --> F2[Row]
-    F2 --> F3[CircleAvatar]
-    F2 --> F4[SizedBox]
-    F2 --> F5[Expanded]
-    F5 --> F6[Column]
-    F6 --> F7[Text: user.name]
-    F6 --> F8[SizedBox]
-    F6 --> F9[Text: user.bio]
-    E --> G[StatsSection]
-    E --> H[PostGridWidget]
-    B --> I[BottomNavigationBar]
-    I --> I1[BottomNavigationBarItem: 홈]
-    I --> I2[BottomNavigationBarItem: 검색]
-    I --> I3[BottomNavigationBarItem: 프로필]
-```
 
 ## 위젯 트리 디버깅
 
@@ -661,18 +537,6 @@ class _MyAnimatedWidgetState extends State<MyAnimatedWidget>
 ## 상속된 위젯(InheritedWidget)과 위젯 트리
 
 `InheritedWidget`은 위젯 트리를 통해 데이터를 효율적으로 전달하는 방법을 제공합니다. 이는 테마, 사용자 데이터 등을 하위 위젯에 전달하는 데 유용합니다.
-
-```mermaid
-graph TD
-    A[InheritedWidget] --> B[Child 1]
-    A --> C[Child 2]
-    B --> D[Grandchild 1]
-    B --> E[Grandchild 2]
-    C --> F[Grandchild 3]
-
-    D -.->|"of(context)"| A
-    F -.->|"of(context)"| A
-```
 
 ### InheritedWidget 예제
 

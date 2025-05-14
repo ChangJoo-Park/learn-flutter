@@ -1,4 +1,6 @@
-# setState와 ValueNotifier
+---
+title: setState와 ValueNotifier
+---
 
 Flutter에서 기본적으로 제공하는 상태 관리 메커니즘인 `setState`와 `ValueNotifier`에 대해 자세히 알아보겠습니다. 이들은 외부 패키지 없이 Flutter 코어 내에서 사용할 수 있는 상태 관리 방법으로, 간단한 앱에서는 이 도구들만으로도 효과적인 상태 관리가 가능합니다.
 
@@ -57,20 +59,6 @@ class _CounterPageState extends State<CounterPage> {
 
 ### setState의 작동 방식
 
-```mermaid
-sequenceDiagram
-    참가자 사용자
-    참가자 위젯
-    참가자 상태
-    참가자 프레임워크
-
-    사용자->>위젯: 상호작용 (버튼 클릭)
-    위젯->>상태: 이벤트 처리 (_incrementCounter 호출)
-    상태->>상태: 내부 상태 변경 (_counter 증가)
-    상태->>프레임워크: setState() 호출
-    프레임워크->>위젯: 위젯 재빌드 요청
-    위젯->>사용자: 업데이트된 UI 표시
-```
 
 ### setState의 주요 특징
 
@@ -337,20 +325,6 @@ class _MyWidgetState extends State<MyWidget> {
 2. **세분화된 UI 업데이트**: 위젯의 특정 부분만 업데이트하고 싶을 때
 3. **StatelessWidget 내 상태**: 상태를 가진 StatelessWidget을 구현할 때
 4. **복잡한 상태 로직**: 상태 로직을 UI 코드에서 분리하고 싶을 때
-
-```mermaid
-graph TD
-    A[상태 관리 선택] --> B{상태 복잡도}
-    B -->|단순| C{상태 범위}
-    B -->|복잡| D[ValueNotifier/ChangeNotifier]
-
-    C -->|지역적| E[setState]
-    C -->|공유 필요| F[ValueNotifier]
-
-    A --> G{UI 갱신 범위}
-    G -->|전체 위젯| H[setState]
-    G -->|부분적| I[ValueNotifier]
-```
 
 ## 실제 예제: 할 일 목록 앱
 

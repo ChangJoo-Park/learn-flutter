@@ -1,4 +1,6 @@
-# CustomPainter와 RenderBox 이해
+---
+title: CustomPainter와 RenderBox 이해
+---
 
 Flutter에서 복잡한 사용자 정의 UI를 구현하기 위해서는 기본 위젯만으로는 한계가 있습니다. 더 유연하고 세밀한 UI를 구현하기 위해 Flutter는 저수준 그래픽 API인 `CustomPainter`와 렌더링 시스템의 기본 요소인 `RenderBox`를 제공합니다. 이 장에서는 이 두 가지 중요한 개념을 자세히 알아보겠습니다.
 
@@ -6,15 +8,6 @@ Flutter에서 복잡한 사용자 정의 UI를 구현하기 위해서는 기본 
 
 `CustomPainter`는 Flutter에서 직접 캔버스에 그리기 위한 강력한 도구입니다. 벡터 그래픽, 차트, 복잡한 애니메이션, 커스텀 진행 표시기 등을 구현할 때 매우 유용합니다.
 
-```mermaid
-graph TD
-    A[CustomPainter] --> B[paint 메서드]
-    A --> C[shouldRepaint 메서드]
-    B --> D[Canvas 객체]
-    B --> E[Size 객체]
-    D --> F[drawLine, drawRect, drawPath 등]
-    E --> G[캔버스의 가로/세로 크기]
-```
 
 ### CustomPainter 사용 방법
 
@@ -291,16 +284,6 @@ Widget build(BuildContext context) {
 ## RenderBox 이해하기
 
 `RenderBox`는 Flutter 렌더링 시스템의 핵심 요소로, 위젯의 레이아웃과 그리기 로직을 담당합니다. 일반적으로 개발자는 직접 `RenderBox`를 다루기보다는 위젯 API를 통해 간접적으로 사용합니다.
-
-```mermaid
-graph TD
-    A[Widget] --> B[Element]
-    B --> C[RenderObject]
-    C --> D[RenderBox]
-    D --> E[layout]
-    D --> F[paint]
-    D --> G[hitTest]
-```
 
 ### RenderBox 계층 구조
 

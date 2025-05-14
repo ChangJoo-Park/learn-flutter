@@ -1,4 +1,6 @@
-# 위젯 개념과 주요 위젯
+---
+title: 위젯 개념과 주요 위젯
+---
 
 Flutter의 핵심은 위젯(Widget)입니다. Flutter 애플리케이션은 여러 위젯들로 구성되어 있으며, 위젯은 UI의 구성 요소를 나타냅니다. 이 장에서는 Flutter 위젯의 기본 개념과 위젯 시스템의 작동 방식을 알아보겠습니다.
 
@@ -17,15 +19,6 @@ Flutter의 핵심은 위젯(Widget)입니다. Flutter 애플리케이션은 여�
 
 Flutter 위젯은 생성, 구성, 렌더링의 주기를 거칩니다:
 
-```mermaid
-graph TD
-    A[위젯 생성] --> B[빌드 메서드 호출]
-    B --> C[요소 트리 생성]
-    C --> D[RenderObject 생성]
-    D --> E[화면에 렌더링]
-    E --> F[위젯 상태 변경]
-    F --> B
-```
 
 1. **위젯 생성**: 위젯 클래스의 인스턴스가 생성됩니다.
 2. **빌드 메서드 호출**: 위젯의 `build()` 메서드가 호출되어 위젯 트리를 구성합니다.
@@ -96,16 +89,6 @@ class _CounterWidgetState extends State<CounterWidget> {
 
 Flutter 애플리케이션의 UI는 위젯 트리로 표현됩니다. 모든 Flutter 앱은 루트 위젯에서 시작하여 자식 위젯들로 구성된 트리 구조를 가집니다.
 
-```mermaid
-graph TD
-    A[MaterialApp] --> B[Scaffold]
-    B --> C[AppBar]
-    B --> D[Body: Column]
-    D --> E[Text]
-    D --> F[Button]
-    D --> G[Image]
-```
-
 위젯 트리의 특징:
 
 1. **부모-자식 관계**: 위젯은 하나의 부모와 여러 자식을 가질 수 있습니다.
@@ -115,13 +98,6 @@ graph TD
 ## 위젯의 세 가지 트리
 
 Flutter는 UI 렌더링을 위해 세 가지 트리를 관리합니다:
-
-```mermaid
-graph TD
-    W[Widget 트리] --> E[Element 트리]
-    E --> R[RenderObject 트리]
-    R --> S[화면 렌더링]
-```
 
 1. **Widget 트리**: UI의 설계도로, 사용자가 작성한 위젯 클래스의 인스턴스들로 구성됩니다.
 2. **Element 트리**: Widget과 RenderObject를 연결하는 중간 계층으로, 위젯의 수명 주기를 관리합니다.
@@ -167,37 +143,6 @@ Scaffold(
 ## Flutter 기본 위젯의 분류
 
 Flutter 위젯은 기능에 따라 여러 카테고리로 분류할 수 있습니다:
-
-```mermaid
-graph TD
-    A[Flutter 위젯] --> B[구조적 위젯]
-    A --> C[시각적 위젯]
-    A --> D[레이아웃 위젯]
-    A --> E[입력 위젯]
-    A --> F[상호작용 위젯]
-    A --> G[애니메이션 위젯]
-
-    B --> B1[Scaffold]
-    B --> B2[AppBar]
-
-    C --> C1[Text]
-    C --> C2[Image]
-    C --> C3[Icon]
-
-    D --> D1[Container]
-    D --> D2[Row/Column]
-    D --> D3[Stack]
-
-    E --> E1[TextField]
-    E --> E2[Checkbox]
-    E --> E3[Radio]
-
-    F --> F1[GestureDetector]
-    F --> F2[InkWell]
-
-    G --> G1[AnimatedContainer]
-    G --> G2[Hero]
-```
 
 ### 구조적 위젯
 
@@ -314,13 +259,6 @@ ListView.builder(
 
 Flutter의 레이아웃 시스템은 부모 위젯이 자식 위젯에게 제약 조건(constraints)을 전달하고, 자식 위젯은 이 제약 조건 내에서 자신의 크기를 결정하는 방식으로 작동합니다.
 
-```mermaid
-graph TD
-    A[부모 위젯] -->|제약 조건 전달| B[자식 위젯]
-    B -->|크기 결정| B
-    B -->|위치 보고| A
-```
-
 제약 조건은 최소/최대 너비와 높이로 구성되며, 자식 위젯은 이 범위 내에서 크기를 결정합니다:
 
 ```dart
@@ -347,19 +285,6 @@ Flutter의 위젯 렌더링 과정은 다음과 같습니다:
 2. **페인팅 단계**: 위젯의 외관이 렌더링됩니다.
 3. **합성 단계**: 렌더링된 레이어들이 화면에 합성됩니다.
 
-```mermaid
-sequenceDiagram
-    참가자 Widget
-    참가자 Element
-    참가자 RenderObject
-    참가자 Screen
-
-    Widget->>Element: 생성/업데이트
-    Element->>RenderObject: 생성/업데이트
-    RenderObject->>RenderObject: 레이아웃 계산
-    RenderObject->>RenderObject: 페인팅
-    RenderObject->>Screen: 합성 및 표시
-```
 
 ## 결론
 

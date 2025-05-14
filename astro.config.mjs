@@ -1,3 +1,8 @@
+import { rehypeMermaid } from "@beoe/rehype-mermaid";
+import { getCache } from "@beoe/cache";
+
+const cache = await getCache();
+
 // @ts-check
 import { defineConfig } from "astro/config";
 import starlight from "@astrojs/starlight";
@@ -7,8 +12,7 @@ import { sidebars } from "./sidebar.config.mjs";
 // https://astro.build/config
 export default defineConfig({
   compressHTML: true,
-  prefetch: true,
-  trailingSlash: "always",
+  prefetch: false,
   integrations: [
     astroExpressiveCode({
       themes: ["dracula"],
@@ -26,4 +30,19 @@ export default defineConfig({
       sidebar: sidebars,
     }),
   ],
+  markdown: {
+    rehypePlugins: [
+      [
+        rehypeMermaid,
+        {
+          strategy: "file",      // alternatively use "data-url"
+          fsPath: "public/beoe", // add this to gitignore
+          webPath: "/beoe",
+          darkScheme: "class",
+          cache,
+        },
+      ],
+    ],
+  },
+
 });
