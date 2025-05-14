@@ -4,6 +4,12 @@ title: 개발 환경 구성
 
 Flutter 개발을 시작하기 위해 필요한 환경을 구성해 보겠습니다. 이 과정에는 Flutter SDK 설치, 코드 에디터 설정, 그리고 개발 도구 구성이 포함됩니다.
 
+### 여러 버전을 사용하고 싶을 때
+
+가이드에 있는 공식적인 방법도 좋지만 여러 버전을 사용하고 싶을 때는 [Flutter Version Manager](https://fvm.app) 또는 [mise](https://mise.jdx.dev)를 사용하세요. Flutter의 최신 버전 업데이트 이후에 바로 사용하는 경우 패키지가 호환이 안되는 경우가 있어 버전을 유지하는데 어려움을 겪을 수 있습니다.
+
+저는 mise를 조금 더 추천 드립니다. Flutter Version Manager와 달리 Flutter 외에 앱 개발에 필요한 Ruby, Node.js 등의 버전도 관리할 수 있습니다.
+
 ## Flutter SDK 설치
 
 ### Windows에서 설치
@@ -174,12 +180,6 @@ flutter doctor --android-licenses
 ### 에뮬레이터 성능 문제
 
 Windows와 Linux 사용자는 BIOS에서 가상화 기술(Intel VT-x 또는 AMD-V)이 활성화되어 있는지 확인하세요.
-
-### 여러 Flutter 버전을 사용하고 싶을 때
-
-[Flutter Version Manager](https://fvm.app) 또는 [mise](https://mise.jdx.dev)를 사용하세요.
-
-mise를 조금 더 추천 드립니다. Flutter Version Manager와 달리 Flutter 외에 앱 개발에 필요한 Ruby, Node.js 등의 버전도 관리할 수 있습니다.
 
 ## 결론
 
