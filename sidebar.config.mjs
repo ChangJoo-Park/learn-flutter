@@ -89,9 +89,17 @@ export const sidebars = [
     items: [
       { label: "빌드 모드", slug: "part8/build-modes" },
       { label: "Android / iOS 배포", slug: "part8/deploy-procedure" },
-      { label: "Codemagic CI/CD", slug: "part8/cicd-codemagic" },
-      { label: "환경 분리 및 flavor", slug: "part8/environment-flavors" },
-      { label: "사용자 분석 도구", slug: "part8/analytics-tools" },
+      { label: "Codemagic CI/CD", slug: "part8/cicd-codemagic", badge: "🚧" },
+      {
+        label: "환경 분리 및 flavor",
+        slug: "part8/environment-flavors",
+        badge: "BETA",
+      },
+      {
+        label: "사용자 분석 도구",
+        slug: "part8/analytics-tools",
+        badge: "BETA",
+      },
       { label: "에러 추적", slug: "part8/error-tracking" },
     ],
   },
@@ -100,6 +108,7 @@ export const sidebars = [
     items: [
       { label: "기능별 vs 계층별 폴더 구조", slug: "part9/folder-structure" },
       { label: "멀티 모듈 아키텍처", slug: "part9/multi-module" },
+      { label: "melos를 이용한 모노레포", slug: "part9/monorepo", badge: "🚧" },
     ],
   },
   {
@@ -110,7 +119,7 @@ export const sidebars = [
       { label: "애니메이션", slug: "part10/animations" },
       { label: "접근성", slug: "part10/accessibility" },
       { label: "다국어 처리", slug: "part10/internationalization" },
-      { label: "성능 최적화", slug: "part10/performance" },
+      { label: "성능 최적화", slug: "part10/performance", badge: "BETA" },
       // { label: "추천 패키지", slug: "part10/recommended-packages" },
     ],
   },
@@ -120,7 +129,7 @@ export const sidebars = [
       // { label: "개발 도구와 링크", slug: "appendix/tools" },
       { label: "Flutter 오류 대응법", slug: "appendix/error-handling" },
       { label: "코드 템플릿", slug: "appendix/code-templates" },
-      { label: "소셜 로그인", slug: "appendix/social-login" },
+      { label: "소셜 로그인", slug: "appendix/social-login", badge: "🚧" },
       { label: "iOS 라이브 액티비티", slug: "appendix/live-activities" },
       { label: "WidgetBook", slug: "appendix/widgetbook" },
       { label: "FAQ", slug: "appendix/faq" },
