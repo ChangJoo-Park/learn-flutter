@@ -5,6 +5,7 @@ const cache = await getCache();
 
 // @ts-check
 import { defineConfig } from "astro/config";
+import sitemap from "@astrojs/sitemap";
 import starlight from "@astrojs/starlight";
 import astroExpressiveCode from "astro-expressive-code";
 import { pluginLineNumbers } from "@expressive-code/plugin-line-numbers";
@@ -14,12 +15,13 @@ export default defineConfig({
   compressHTML: true,
   prefetch: false,
   integrations: [
+    sitemap(),
     astroExpressiveCode({
       themes: ["dracula"],
       plugins: [pluginLineNumbers()],
     }),
     starlight({
-      title: "Flutter 문서",
+      title: "Flutter 배우기",
       social: [
         {
           icon: "github",
@@ -44,5 +46,5 @@ export default defineConfig({
       ],
     ],
   },
-
+  site: "https://changjoo-park.github.io/learn-flutter"
 });

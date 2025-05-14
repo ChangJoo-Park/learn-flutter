@@ -8,10 +8,10 @@
     "build": "astro build",
     "preview": "astro preview",
     "upgrade": "npx @astrojs/upgrade",
-    "postinstall": "playwright install chromium",
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/sitemap": "^3.4.0",
     "@astrojs/starlight": "^0.34.3",
     "@beoe/cache": "^0.1.1",
     "@beoe/rehype-mermaid": "^0.4.2",
