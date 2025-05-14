@@ -166,8 +166,8 @@ print(value);  // true
 Dart에서는 작은따옴표(`'`) 또는 큰따옴표(`"`)를 사용하여 문자열을 생성할 수 있습니다.
 
 ```dart
-String single = '작은따옴표 문자열';
-String double = "큰따옴표 문자열";
+String _single = '작은따옴표 문자열';
+String _double = "큰따옴표 문자열";
 ```
 
 ### 문자열 보간(Interpolation)
