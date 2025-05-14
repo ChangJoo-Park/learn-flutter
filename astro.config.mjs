@@ -54,6 +54,11 @@ export default defineConfig({
           href: "https://github.com/changjoo-park/learn-flutter",
         },
       ],
+      editLink: {
+        text: "Edit this page on GitHub",
+        icon: "github",
+        href: "https://github.com/changjoo-park/learn-flutter/edit/main/docs/",
+      },
       sidebar: sidebars,
       plugins: [
         starlightLlmsTxt({
