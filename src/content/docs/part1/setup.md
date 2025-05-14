@@ -175,6 +175,12 @@ flutter doctor --android-licenses
 
 Windows와 Linux 사용자는 BIOS에서 가상화 기술(Intel VT-x 또는 AMD-V)이 활성화되어 있는지 확인하세요.
 
+### 여러 Flutter 버전을 사용하고 싶을 때
+
+[Flutter Version Manager](https://fvm.app) 또는 [mise](https://mise.jdx.dev)를 사용하세요.
+
+mise를 조금 더 추천 드립니다. Flutter Version Manager와 달리 Flutter 외에 앱 개발에 필요한 Ruby, Node.js 등의 버전도 관리할 수 있습니다.
+
 ## 결론
 
 이제 Flutter 개발을 위한 환경 설정이 완료되었습니다. 다음 섹션에서는 첫 번째 Flutter 프로젝트를 생성하고 실행하는 방법을 알아보겠습니다.
