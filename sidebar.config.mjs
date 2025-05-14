@@ -2,6 +2,7 @@ export const sidebars = [
   {
     label: "📦 Part 1. 시작하기",
     items: [
+      { label: "소개", slug: "part1/introduction" },
       { label: "개발 환경 구성", slug: "part1/setup" },
       { label: "첫 프로젝트 생성 및 실행", slug: "part1/first-project" },
       { label: "Flutter 프로젝트 구조 이해", slug: "part1/project-structure" },
@@ -25,7 +26,10 @@ export const sidebars = [
     label: "🧱 Part 3. Flutter의 기본 구성 요소",
     items: [
       { label: "위젯 개념과 주요 위젯", slug: "part3/widgets" },
-      { label: "Stateless / Stateful 위젯 상세", slug: "part3/stateless-stateful" },
+      {
+        label: "Stateless / Stateful 위젯 상세",
+        slug: "part3/stateless-stateful",
+      },
       { label: "Widget Tree 이해", slug: "part3/widget-tree" },
       { label: "주요 위젯", slug: "part3/basic-widgets" },
       { label: "레이아웃 위젯", slug: "part3/layout-widgets" },
