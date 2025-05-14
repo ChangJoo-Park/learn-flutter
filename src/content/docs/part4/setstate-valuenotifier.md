@@ -57,9 +57,6 @@ class _CounterPageState extends State<CounterPage> {
 }
 ```
 
-### setState의 작동 방식
-
-
 ### setState의 주요 특징
 
 1. **간단함**: 사용하기 쉽고 이해하기 직관적
