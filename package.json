@@ -12,7 +12,9 @@
   },
   "dependencies": {
     "@astrojs/starlight": "^0.34.3",
+    "@expressive-code/plugin-line-numbers": "^0.41.2",
     "astro": "^5.7.12",
+    "astro-expressive-code": "^0.41.2",
     "sharp": "^0.32.5"
   }
 }

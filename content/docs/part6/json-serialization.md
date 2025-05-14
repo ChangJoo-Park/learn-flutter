@@ -1,0 +1,1074 @@
+# JSON 직렬화 (freezed, json_serializable)
+
+REST API와 통신할 때 JSON 형식의 데이터를 주고받는 경우가 많습니다. Flutter/Dart에서는 이러한 JSON 데이터를 Dart 객체로 변환하고, 반대로 Dart 객체를 JSON으로 직렬화하는 과정이 필요합니다. 이 장에서는 `json_serializable`과 `freezed` 패키지를 활용한 JSON 직렬화 방법을 살펴보겠습니다.
+
+## JSON 직렬화의 필요성
+
+외부 API에서 데이터를 가져오면 보통 JSON 형태로 제공됩니다. 이를 그대로 사용하면 다음과 같은 문제가 발생합니다:
+
+1. **타입 안전성 부재**: JSON은 동적 타입이므로 컴파일 시점에 오류를 발견하기 어렵습니다.
+2. **코드 자동 완성 불가**: IDE에서 속성 이름을 자동 완성할 수 없습니다.
+3. **리팩토링 어려움**: 속성 이름이 변경될 때 모든 참조를 업데이트하기 어렵습니다.
+4. **문서화 부족**: 속성의 의미와 타입이 명확하게 정의되지 않습니다.
+
+이러한 문제를 해결하기 위해 JSON을 Dart 클래스로 변환하는 과정이 필요합니다.
+
+## 수동 JSON 직렬화
+
+가장 기본적인 방법은 JSON 변환 코드를 직접 작성하는 것입니다:
+
+```dart
+class User {
+  final int id;
+  final String name;
+  final String email;
+  final DateTime createdAt;
+
+  User({
+    required this.id,
+    required this.name,
+    required this.email,
+    required this.createdAt,
+  });
+
+  // JSON에서 User 객체로 변환
+  factory User.fromJson(Map<String, dynamic> json) {
+    return User(
+      id: json['id'] as int,
+      name: json['name'] as String,
+      email: json['email'] as String,
+      createdAt: DateTime.parse(json['created_at'] as String),
+    );
+  }
+
+  // User 객체에서 JSON으로 변환
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'name': name,
+      'email': email,
+      'created_at': createdAt.toIso8601String(),
+    };
+  }
+}
+```
+
+이 방법은 간단한 모델에는 잘 작동하지만, 다음과 같은 단점이 있습니다:
+
+1. **반복적인 코드**: 비슷한 코드를 여러 모델마다 작성해야 합니다.
+2. **오류 가능성**: 수동으로 작성하다 보면 타입 캐스팅이나 누락된 필드 등의 오류가 발생할 수 있습니다.
+3. **유지보수 어려움**: 모델이 변경될 때마다 JSON 변환 코드도 수정해야 합니다.
+
+## json_serializable 사용하기
+
+`json_serializable` 패키지는 코드 생성을 통해 JSON 직렬화 코드를 자동으로 생성해 줍니다.
+
+### 1. 패키지 설치
+
+`pubspec.yaml` 파일에 필요한 패키지를 추가합니다:
+
+```yaml
+dependencies:
+  json_annotation: ^4.8.1
+
+dev_dependencies:
+  build_runner: ^2.4.6
+  json_serializable: ^6.7.1
+```
+
+### 2. 모델 클래스 정의
+
+```dart
+import 'package:json_annotation/json_annotation.dart';
+
+// 생성될 코드의 파일명을 지정합니다
+part 'user.g.dart';
+
+// 클래스에 어노테이션을 추가합니다
+@JsonSerializable()
+class User {
+  final int id;
+  final String name;
+  final String email;
+
+  // JSON 필드명이 Dart 속성명과 다른 경우 매핑
+  @JsonKey(name: 'created_at')
+  final DateTime createdAt;
+
+  User({
+    required this.id,
+    required this.name,
+    required this.email,
+    required this.createdAt,
+  });
+
+  // 팩토리 메서드는 생성된 코드를 호출합니다
+  factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
+
+  // toJson 메서드도 생성된 코드를 호출합니다
+  Map<String, dynamic> toJson() => _$UserToJson(this);
+}
+```
+
+### 3. 코드 생성 실행
+
+다음 명령어로 코드를 생성합니다:
+
+```bash
+flutter pub run build_runner build
+```
+
+변경 사항을 감시하면서 지속적으로 코드를 생성하려면:
+
+```bash
+flutter pub run build_runner watch
+```
+
+기존 생성 파일과 충돌이 있을 경우:
+
+```bash
+flutter pub run build_runner build --delete-conflicting-outputs
+```
+
+### 4. json_serializable 고급 기능
+
+#### 커스텀 변환기 사용
+
+```dart
+@JsonSerializable()
+class Product {
+  final int id;
+  final String name;
+
+  // 커스텀 변환기 사용
+  @JsonKey(
+    fromJson: _colorFromJson,
+    toJson: _colorToJson,
+  )
+  final Color color;
+
+  Product({
+    required this.id,
+    required this.name,
+    required this.color,
+  });
+
+  factory Product.fromJson(Map<String, dynamic> json) => _$ProductFromJson(json);
+  Map<String, dynamic> toJson() => _$ProductToJson(this);
+
+  // 커스텀 변환 함수
+  static Color _colorFromJson(String hex) => Color(int.parse(hex.substring(1), radix: 16) + 0xFF000000);
+  static String _colorToJson(Color color) => '#${color.value.toRadixString(16).substring(2)}';
+}
+```
+
+#### 중첩 객체 처리
+
+```dart
+@JsonSerializable(explicitToJson: true)
+class Order {
+  final int id;
+  final DateTime orderDate;
+  final User customer; // 중첩 객체
+  final List<OrderItem> items; // 중첩 객체 리스트
+
+  Order({
+    required this.id,
+    required this.orderDate,
+    required this.customer,
+    required this.items,
+  });
+
+  factory Order.fromJson(Map<String, dynamic> json) => _$OrderFromJson(json);
+  Map<String, dynamic> toJson() => _$OrderToJson(this);
+}
+
+@JsonSerializable()
+class OrderItem {
+  final int id;
+  final String productName;
+  final int quantity;
+  final double price;
+
+  OrderItem({
+    required this.id,
+    required this.productName,
+    required this.quantity,
+    required this.price,
+  });
+
+  factory OrderItem.fromJson(Map<String, dynamic> json) => _$OrderItemFromJson(json);
+  Map<String, dynamic> toJson() => _$OrderItemToJson(this);
+}
+```
+
+#### 필드 포함/제외 설정
+
+```dart
+@JsonSerializable()
+class User {
+  final int id;
+  final String name;
+  final String email;
+
+  // API에서는 받지만 JSON으로 변환할 때는 제외
+  @JsonKey(includeToJson: false)
+  final String? authToken;
+
+  // JSON으로 변환할 때만 포함
+  @JsonKey(includeFromJson: false)
+  final bool isLoggedIn;
+
+  User({
+    required this.id,
+    required this.name,
+    required this.email,
+    this.authToken,
+    this.isLoggedIn = false,
+  });
+
+  factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
+  Map<String, dynamic> toJson() => _$UserToJson(this);
+}
+```
+
+#### 기본값 설정
+
+```dart
+@JsonSerializable()
+class Settings {
+  // 기본값 설정
+  @JsonKey(defaultValue: 'light')
+  final String theme;
+
+  @JsonKey(defaultValue: true)
+  final bool notifications;
+
+  Settings({
+    required this.theme,
+    required this.notifications,
+  });
+
+  factory Settings.fromJson(Map<String, dynamic> json) => _$SettingsFromJson(json);
+  Map<String, dynamic> toJson() => _$SettingsToJson(this);
+}
+```
+
+#### null 안전성 처리
+
+```dart
+@JsonSerializable(includeIfNull: false) // null 값은 JSON에 포함하지 않음
+class Profile {
+  final int id;
+  final String name;
+
+  // null일 수 있는 필드
+  final String? bio;
+  final String? avatarUrl;
+
+  // null일 경우 기본값 설정
+  @JsonKey(defaultValue: 0)
+  final int followersCount;
+
+  Profile({
+    required this.id,
+    required this.name,
+    this.bio,
+    this.avatarUrl,
+    required this.followersCount,
+  });
+
+  factory Profile.fromJson(Map<String, dynamic> json) => _$ProfileFromJson(json);
+  Map<String, dynamic> toJson() => _$ProfileToJson(this);
+}
+```
+
+## freezed 패키지 소개
+
+`freezed`는 불변(immutable) 모델 클래스를 위한 코드 생성 패키지로, 다음과 같은 기능을 제공합니다:
+
+1. **불변성**: 객체가 생성된 후 변경할 수 없도록 합니다.
+2. **copyWith**: 기존 객체를 기반으로 일부 속성만 변경한 새 객체를 쉽게 생성합니다.
+3. **동등성 비교**: `==` 연산자와 `hashCode`를 자동으로 구현합니다.
+4. **직렬화**: `json_serializable`과 통합되어 JSON 직렬화를 지원합니다.
+5. **패턴 매칭**: 다양한 타입의 데이터를 안전하게 처리할 수 있습니다.
+6. **공용체(union types)**: 여러 타입을 하나의 타입으로 그룹화할 수 있습니다.
+
+### 1. 패키지 설치
+
+`pubspec.yaml`에 다음 패키지를 추가합니다:
+
+```yaml
+dependencies:
+  freezed_annotation: ^2.4.1
+  json_annotation: ^4.8.1
+
+dev_dependencies:
+  build_runner: ^2.4.6
+  freezed: ^2.4.5
+  json_serializable: ^6.7.1
+```
+
+### 2. freezed 기본 모델 정의
+
+```dart
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:json_annotation/json_annotation.dart';
+
+// 생성될 코드 파일명 지정
+part 'user.freezed.dart';
+part 'user.g.dart';
+
+@freezed
+class User with _$User {
+  const factory User({
+    required int id,
+    required String name,
+    required String email,
+    @JsonKey(name: 'created_at') required DateTime createdAt,
+  }) = _User;
+
+  factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
+}
+```
+
+### 3. 코드 생성 실행
+
+```bash
+flutter pub run build_runner build --delete-conflicting-outputs
+```
+
+### 4. freezed 활용
+
+#### copyWith 사용
+
+```dart
+final user = User(
+  id: 1,
+  name: '홍길동',
+  email: 'hong@example.com',
+  createdAt: DateTime.now(),
+);
+
+// 이름만 변경한 새 객체 생성
+final updatedUser = user.copyWith(name: '김철수');
+
+print(user.name);      // '홍길동'
+print(updatedUser.name); // '김철수'
+```
+
+#### 동등성 비교
+
+```dart
+final user1 = User(
+  id: 1,
+  name: '홍길동',
+  email: 'hong@example.com',
+  createdAt: DateTime.now(),
+);
+
+// 같은 값을 가진 새 객체
+final user2 = User(
+  id: 1,
+  name: '홍길동',
+  email: 'hong@example.com',
+  createdAt: user1.createdAt,
+);
+
+print(user1 == user2); // true
+```
+
+### 5. Union Types (대수적 데이터 타입)
+
+`freezed`의 강력한 기능 중 하나는 Union Types입니다. 이를 통해 여러 가능한 상태나 변형을 한 클래스로 표현할 수 있습니다.
+
+```dart
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:json_annotation/json_annotation.dart';
+
+part 'api_result.freezed.dart';
+part 'api_result.g.dart';
+
+@freezed
+class ApiResult<T> with _$ApiResult<T> {
+  // 성공 상태
+  const factory ApiResult.success({
+    required T data,
+  }) = Success<T>;
+
+  // 에러 상태
+  const factory ApiResult.error({
+    required String message,
+    @Default(400) int statusCode,
+  }) = Error<T>;
+
+  // 로딩 상태
+  const factory ApiResult.loading() = Loading<T>;
+
+  factory ApiResult.fromJson(Map<String, dynamic> json) =>
+      _$ApiResultFromJson(json);
+}
+```
+
+#### Union Types 사용 예
+
+```dart
+Future<ApiResult<User>> fetchUser(int id) async {
+  try {
+    // 로딩 상태 반환
+    ApiResult<User> loadingResult = ApiResult.loading();
+
+    // API 호출
+    final response = await dio.get('/users/$id');
+
+    // 성공 상태 반환
+    return ApiResult.success(data: User.fromJson(response.data));
+  } catch (e) {
+    // 에러 상태 반환
+    return ApiResult.error(message: '사용자 정보를 가져오는 데 실패했습니다');
+  }
+}
+
+// 위젯에서 사용
+Widget build(BuildContext context) {
+  return FutureBuilder<ApiResult<User>>(
+    future: fetchUser(1),
+    builder: (context, snapshot) {
+      if (!snapshot.hasData) {
+        return CircularProgressIndicator();
+      }
+
+      // when 메서드로 패턴 매칭
+      return snapshot.data!.when(
+        success: (user) => UserInfoWidget(user: user),
+        error: (message, statusCode) => ErrorWidget(message: message),
+        loading: () => LoadingWidget(),
+      );
+    },
+  );
+}
+```
+
+### 6. freezed의 고급 기능
+
+#### Default Values
+
+```dart
+@freezed
+class Settings with _$Settings {
+  const factory Settings({
+    @Default('light') String theme,
+    @Default(true) bool notifications,
+    @Default([]) List<String> favorites,
+  }) = _Settings;
+
+  factory Settings.fromJson(Map<String, dynamic> json) => _$SettingsFromJson(json);
+}
+```
+
+#### 커스텀 직렬화
+
+```dart
+@freezed
+class Product with _$Product {
+  const factory Product({
+    required int id,
+    required String name,
+    @JsonKey(
+      fromJson: _colorFromJson,
+      toJson: _colorToJson,
+    )
+    required Color color,
+  }) = _Product;
+
+  factory Product.fromJson(Map<String, dynamic> json) => _$ProductFromJson(json);
+
+  // 정적 메서드는 클래스 바디에 정의
+  static Color _colorFromJson(String hex) => Color(int.parse(hex.substring(1), radix: 16) + 0xFF000000);
+  static String _colorToJson(Color color) => '#${color.value.toRadixString(16).substring(2)}';
+}
+```
+
+#### 중첩 freezed 모델
+
+```dart
+@freezed
+class Order with _$Order {
+  const factory Order({
+    required int id,
+    required DateTime orderDate,
+    required User customer,
+    required List<OrderItem> items,
+  }) = _Order;
+
+  factory Order.fromJson(Map<String, dynamic> json) => _$OrderFromJson(json);
+}
+
+@freezed
+class OrderItem with _$OrderItem {
+  const factory OrderItem({
+    required int id,
+    required String productName,
+    required int quantity,
+    required double price,
+  }) = _OrderItem;
+
+  factory OrderItem.fromJson(Map<String, dynamic> json) => _$OrderItemFromJson(json);
+}
+```
+
+#### 생성자 매개변수 검증
+
+```dart
+@freezed
+class User with _$User {
+  // 프라이빗 생성자로 검증 로직 추가
+  const factory User({
+    required int id,
+    required String name,
+    required String email,
+  }) = _User;
+
+  factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
+
+  // named 생성자를 통해 팩토리 패턴 구현
+  factory User.create({
+    required int id,
+    required String name,
+    required String email,
+  }) {
+    // 이메일 유효성 검사
+    if (!_isValidEmail(email)) {
+      throw ArgumentError('Invalid email format');
+    }
+
+    return User(id: id, name: name, email: email);
+  }
+
+  // 프라이빗 헬퍼 메서드
+  static bool _isValidEmail(String email) {
+    return RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(email);
+  }
+}
+```
+
+## freezed와 json_serializable의 통합 활용
+
+실제 앱에서는 freezed와 json_serializable을 함께 사용하여 강력한 모델 클래스를 만들 수 있습니다. 다음은 일반적인 사용 패턴입니다:
+
+### 1. API 응답 모델 정의
+
+```dart
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:json_annotation/json_annotation.dart';
+
+part 'api_response.freezed.dart';
+part 'api_response.g.dart';
+
+@Freezed(genericArgumentFactories: true)
+class ApiResponse<T> with _$ApiResponse<T> {
+  const factory ApiResponse({
+    required bool success,
+    String? message,
+    T? data,
+    @Default([]) List<String> errors,
+  }) = _ApiResponse<T>;
+
+  factory ApiResponse.fromJson(
+    Map<String, dynamic> json,
+    T Function(Object? json) fromJsonT,
+  ) =>
+      _$ApiResponseFromJson(json, fromJsonT);
+}
+```
+
+### 2. 도메인별 모델 정의
+
+```dart
+@freezed
+class User with _$User {
+  const factory User({
+    required int id,
+    required String name,
+    required String email,
+    @JsonKey(name: 'created_at') required DateTime createdAt,
+    @Default([]) List<String> roles,
+    String? avatarUrl,
+  }) = _User;
+
+  factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
+}
+
+@freezed
+class Product with _$Product {
+  const factory Product({
+    required int id,
+    required String name,
+    required double price,
+    @Default(0) int stock,
+    String? description,
+    @Default([]) List<String> categories,
+    @Default(false) bool isFeatured,
+  }) = _Product;
+
+  factory Product.fromJson(Map<String, dynamic> json) => _$ProductFromJson(json);
+}
+```
+
+### 3. API 서비스에서 활용
+
+```dart
+class ApiService {
+  final Dio _dio;
+
+  ApiService(this._dio);
+
+  Future<ApiResponse<List<User>>> getUsers() async {
+    try {
+      final response = await _dio.get('/users');
+      return ApiResponse.fromJson(
+        response.data,
+        (json) => (json as List)
+            .map((item) => User.fromJson(item as Map<String, dynamic>))
+            .toList(),
+      );
+    } catch (e) {
+      return ApiResponse(
+        success: false,
+        message: '사용자 목록을 가져오는데 실패했습니다',
+        errors: [e.toString()],
+      );
+    }
+  }
+
+  Future<ApiResponse<User>> getUserById(int id) async {
+    try {
+      final response = await _dio.get('/users/$id');
+      return ApiResponse.fromJson(
+        response.data,
+        (json) => User.fromJson(json as Map<String, dynamic>),
+      );
+    } catch (e) {
+      return ApiResponse(
+        success: false,
+        message: '사용자 정보를 가져오는데 실패했습니다',
+        errors: [e.toString()],
+      );
+    }
+  }
+}
+```
+
+### 4. 뷰 모델에서 활용
+
+```dart
+class UserViewModel extends ChangeNotifier {
+  final ApiService _apiService;
+
+  UserViewModel(this._apiService);
+
+  ApiResult<List<User>> _users = ApiResult.loading();
+  ApiResult<List<User>> get users => _users;
+
+  Future<void> fetchUsers() async {
+    _users = ApiResult.loading();
+    notifyListeners();
+
+    try {
+      final response = await _apiService.getUsers();
+
+      if (response.success && response.data != null) {
+        _users = ApiResult.success(data: response.data!);
+      } else {
+        _users = ApiResult.error(
+          message: response.message ?? '알 수 없는 오류가 발생했습니다',
+        );
+      }
+    } catch (e) {
+      _users = ApiResult.error(message: e.toString());
+    }
+
+    notifyListeners();
+  }
+}
+```
+
+### 5. UI에서 활용
+
+```dart
+class UsersScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final viewModel = Provider.of<UserViewModel>(context);
+
+    return Scaffold(
+      appBar: AppBar(title: Text('사용자 목록')),
+      body: viewModel.users.when(
+        loading: () => Center(child: CircularProgressIndicator()),
+        success: (users) => ListView.builder(
+          itemCount: users.length,
+          itemBuilder: (context, index) {
+            final user = users[index];
+            return ListTile(
+              title: Text(user.name),
+              subtitle: Text(user.email),
+              trailing: Icon(Icons.arrow_forward_ios),
+              onTap: () => Navigator.pushNamed(
+                context,
+                '/user-details',
+                arguments: user.id,
+              ),
+            );
+          },
+        ),
+        error: (message, _) => Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text('오류: $message', style: TextStyle(color: Colors.red)),
+              SizedBox(height: 16),
+              ElevatedButton(
+                onPressed: () => viewModel.fetchUsers(),
+                child: Text('다시 시도'),
+              ),
+            ],
+          ),
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => viewModel.fetchUsers(),
+        child: Icon(Icons.refresh),
+      ),
+    );
+  }
+}
+```
+
+## 실제 예제: Todo 앱 모델
+
+Todo 앱을 위한 데이터 모델을 `freezed`와 `json_serializable`을 사용하여 구현해 보겠습니다:
+
+```dart
+// todo.dart
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:json_annotation/json_annotation.dart';
+
+part 'todo.freezed.dart';
+part 'todo.g.dart';
+
+@freezed
+class Todo with _$Todo {
+  const factory Todo({
+    required String id,
+    required String title,
+    @Default('') String description,
+    @Default(false) bool completed,
+    @JsonKey(name: 'created_at') required DateTime createdAt,
+    @JsonKey(name: 'updated_at') DateTime? updatedAt,
+    @Default('normal') String priority,
+    @Default([]) List<String> tags,
+  }) = _Todo;
+
+  factory Todo.fromJson(Map<String, dynamic> json) => _$TodoFromJson(json);
+
+  // 추가 팩토리 메서드
+  factory Todo.create({
+    required String title,
+    String description = '',
+    String priority = 'normal',
+    List<String> tags = const [],
+  }) {
+    return Todo(
+      id: DateTime.now().millisecondsSinceEpoch.toString(),
+      title: title,
+      description: description,
+      createdAt: DateTime.now(),
+      priority: priority,
+      tags: tags,
+    );
+  }
+}
+
+// todo_status.dart
+@freezed
+class TodoStatus with _$TodoStatus {
+  const factory TodoStatus.initial() = _Initial;
+  const factory TodoStatus.loading() = _Loading;
+  const factory TodoStatus.loaded({required List<Todo> todos}) = _Loaded;
+  const factory TodoStatus.error({required String message}) = _Error;
+}
+
+// todo_repository.dart
+class TodoRepository {
+  final Dio _dio;
+
+  TodoRepository(this._dio);
+
+  Future<List<Todo>> getTodos() async {
+    try {
+      final response = await _dio.get('/todos');
+      return (response.data as List)
+          .map((json) => Todo.fromJson(json as Map<String, dynamic>))
+          .toList();
+    } catch (e) {
+      throw Exception('할 일 목록을 가져오는데 실패했습니다: $e');
+    }
+  }
+
+  Future<Todo> createTodo(Todo todo) async {
+    try {
+      final response = await _dio.post(
+        '/todos',
+        data: todo.toJson(),
+      );
+      return Todo.fromJson(response.data as Map<String, dynamic>);
+    } catch (e) {
+      throw Exception('할 일을 생성하는데 실패했습니다: $e');
+    }
+  }
+
+  Future<Todo> updateTodo(Todo todo) async {
+    try {
+      final response = await _dio.put(
+        '/todos/${todo.id}',
+        data: todo.toJson(),
+      );
+      return Todo.fromJson(response.data as Map<String, dynamic>);
+    } catch (e) {
+      throw Exception('할 일을 업데이트하는데 실패했습니다: $e');
+    }
+  }
+
+  Future<void> deleteTodo(String id) async {
+    try {
+      await _dio.delete('/todos/$id');
+    } catch (e) {
+      throw Exception('할 일을 삭제하는데 실패했습니다: $e');
+    }
+  }
+}
+
+// todo_view_model.dart
+class TodoViewModel extends ChangeNotifier {
+  final TodoRepository _repository;
+
+  TodoViewModel(this._repository);
+
+  TodoStatus _status = TodoStatus.initial();
+  TodoStatus get status => _status;
+
+  Future<void> fetchTodos() async {
+    _status = TodoStatus.loading();
+    notifyListeners();
+
+    try {
+      final todos = await _repository.getTodos();
+      _status = TodoStatus.loaded(todos: todos);
+    } catch (e) {
+      _status = TodoStatus.error(message: e.toString());
+    }
+
+    notifyListeners();
+  }
+
+  Future<void> createTodo(String title, String description) async {
+    try {
+      final newTodo = Todo.create(
+        title: title,
+        description: description,
+      );
+
+      await _repository.createTodo(newTodo);
+      await fetchTodos(); // 목록 새로고침
+    } catch (e) {
+      _status = TodoStatus.error(message: '할 일을 생성하는데 실패했습니다: ${e.toString()}');
+      notifyListeners();
+    }
+  }
+
+  Future<void> toggleTodoCompleted(Todo todo) async {
+    try {
+      final updatedTodo = todo.copyWith(
+        completed: !todo.completed,
+        updatedAt: DateTime.now(),
+      );
+
+      await _repository.updateTodo(updatedTodo);
+      await fetchTodos(); // 목록 새로고침
+    } catch (e) {
+      _status = TodoStatus.error(message: '할 일 상태를 변경하는데 실패했습니다: ${e.toString()}');
+      notifyListeners();
+    }
+  }
+
+  Future<void> deleteTodo(String id) async {
+    try {
+      await _repository.deleteTodo(id);
+      await fetchTodos(); // 목록 새로고침
+    } catch (e) {
+      _status = TodoStatus.error(message: '할 일을 삭제하는데 실패했습니다: ${e.toString()}');
+      notifyListeners();
+    }
+  }
+}
+
+// todo_screen.dart
+class TodoScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final viewModel = Provider.of<TodoViewModel>(context);
+
+    return Scaffold(
+      appBar: AppBar(title: Text('할 일 목록')),
+      body: viewModel.status.when(
+        initial: () {
+          // 초기 데이터 로드
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            viewModel.fetchTodos();
+          });
+          return Center(child: Text('데이터를 로드합니다...'));
+        },
+        loading: () => Center(child: CircularProgressIndicator()),
+        loaded: (todos) => todos.isEmpty
+            ? Center(child: Text('할 일이 없습니다.'))
+            : ListView.builder(
+                itemCount: todos.length,
+                itemBuilder: (context, index) {
+                  final todo = todos[index];
+                  return TodoItem(
+                    todo: todo,
+                    onToggle: () => viewModel.toggleTodoCompleted(todo),
+                    onDelete: () => viewModel.deleteTodo(todo.id),
+                  );
+                },
+              ),
+        error: (message) => Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text('오류: $message', style: TextStyle(color: Colors.red)),
+              SizedBox(height: 16),
+              ElevatedButton(
+                onPressed: () => viewModel.fetchTodos(),
+                child: Text('다시 시도'),
+              ),
+            ],
+          ),
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => _showAddTodoDialog(context, viewModel),
+        child: Icon(Icons.add),
+      ),
+    );
+  }
+
+  void _showAddTodoDialog(BuildContext context, TodoViewModel viewModel) {
+    final titleController = TextEditingController();
+    final descriptionController = TextEditingController();
+
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text('새 할 일 추가'),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            TextField(
+              controller: titleController,
+              decoration: InputDecoration(labelText: '제목'),
+            ),
+            TextField(
+              controller: descriptionController,
+              decoration: InputDecoration(labelText: '설명'),
+              maxLines: 3,
+            ),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: Text('취소'),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              final title = titleController.text.trim();
+              final description = descriptionController.text.trim();
+
+              if (title.isNotEmpty) {
+                viewModel.createTodo(title, description);
+                Navigator.pop(context);
+              }
+            },
+            child: Text('추가'),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+// todo_item.dart
+class TodoItem extends StatelessWidget {
+  final Todo todo;
+  final VoidCallback onToggle;
+  final VoidCallback onDelete;
+
+  const TodoItem({
+    Key? key,
+    required this.todo,
+    required this.onToggle,
+    required this.onDelete,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Dismissible(
+      key: Key(todo.id),
+      background: Container(
+        color: Colors.red,
+        alignment: Alignment.centerRight,
+        padding: EdgeInsets.symmetric(horizontal: 16),
+        child: Icon(Icons.delete, color: Colors.white),
+      ),
+      direction: DismissDirection.endToStart,
+      onDismissed: (_) => onDelete(),
+      child: ListTile(
+        title: Text(
+          todo.title,
+          style: TextStyle(
+            decoration: todo.completed ? TextDecoration.lineThrough : null,
+            color: todo.completed ? Colors.grey : null,
+          ),
+        ),
+        subtitle: todo.description.isNotEmpty ? Text(todo.description) : null,
+        leading: Checkbox(
+          value: todo.completed,
+          onChanged: (_) => onToggle(),
+        ),
+        trailing: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            if (todo.priority == 'high')
+              Icon(Icons.priority_high, color: Colors.red),
+            Text(
+              DateFormat.yMMMd().format(todo.createdAt),
+              style: TextStyle(fontSize: 12),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+```
+
+## 요약
+
+- **JSON 직렬화**는 외부 API와 통신하는 Flutter 앱에서 필수적인 기능입니다.
+- **수동 직렬화**는 간단한 모델에는 적합하지만, 모델이 복잡해질수록 코드 중복과 오류 가능성이 증가합니다.
+- **json_serializable** 패키지는 코드 생성을 통해 JSON 직렬화 코드를 자동으로 생성해 줍니다.
+- **freezed** 패키지는 불변성, 복사본 생성, 동등성 비교, JSON 직렬화, 유니온 타입 등 강력한 기능을 제공합니다.
+- **freezed와 json_serializable의 통합**을 통해 타입 안전하고 유지보수하기 쉬운 모델 클래스를 만들 수 있습니다.
+
+이 장에서 배운 기술을 활용하면 API 통신 코드의 안정성과 유지보수성을 크게 향상시킬 수 있습니다. 특히 복잡한 데이터 구조를 다루는 대규모 앱에서는 이러한 코드 생성 도구가 필수적입니다.
