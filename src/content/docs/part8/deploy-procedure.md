@@ -40,7 +40,7 @@ storeFile=<키스토어 파일 경로, 예: /Users/username/upload-keystore.jks>
 
 2. `android/app/build.gradle` 파일 수정:
 
-```gradle
+```txt
 // 파일 상단에 다음 코드 추가
 def keystoreProperties = new Properties()
 def keystorePropertiesFile = rootProject.file('key.properties')

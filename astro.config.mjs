@@ -10,6 +10,9 @@ import starlight from "@astrojs/starlight";
 import astroExpressiveCode from "astro-expressive-code";
 import { pluginLineNumbers } from "@expressive-code/plugin-line-numbers";
 import { sidebars } from "./sidebar.config.mjs";
+import starlightLlmsTxt from 'starlight-llms-txt'
+
+
 // https://astro.build/config
 export default defineConfig({
   compressHTML: true,
@@ -32,6 +35,11 @@ export default defineConfig({
         },
       ],
       sidebar: sidebars,
+      plugins: [
+        starlightLlmsTxt({
+          projectName: "Flutter 배우기",
+        }),
+      ],
     }),
   ],
   markdown: {

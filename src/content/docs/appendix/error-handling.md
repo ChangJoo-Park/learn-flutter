@@ -273,7 +273,7 @@ Execution failed for task ':app:mergeDebugResources'. > java.lang.OutOfMemoryErr
 **원인**: 메서드 수가 DEX 제한을 초과
 **해결 방법**: `android/app/build.gradle`에 멀티덱스 활성화
 
-```gradle
+```txt
 android {
   defaultConfig {
     multiDexEnabled true

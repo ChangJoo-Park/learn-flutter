@@ -226,7 +226,7 @@ class MyHomePage extends StatelessWidget {
 
 **android/app/build.gradle** 파일을 수정하여 각 Flavor에 대한 설정을 추가합니다:
 
-```gradle
+```txt
 android {
     // 기존 설정...
 
@@ -483,7 +483,7 @@ Firebase 프로젝트를 환경별로 분리하여 관리하는 것이 좋습니
 
 **android/app/build.gradle**:
 
-```gradle
+```txt
 android {
     // 기존 설정...
 
