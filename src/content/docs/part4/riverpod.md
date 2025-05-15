@@ -26,12 +26,12 @@ Riverpod를 사용하기 위해 먼저 필요한 패키지를 설치해야 합�
 dependencies:
   flutter:
     sdk: flutter
-  flutter_riverpod: ^2.3.6 # 최신 버전 확인
-  riverpod_annotation: ^2.1.1
+  flutter_riverpod: ^2.6.1 # 최신 버전 확인
+  riverpod_annotation: ^2.6.1
 
 dev_dependencies:
-  build_runner: ^2.3.3
-  riverpod_generator: ^2.2.3
+  build_runner:
+  riverpod_generator: ^2.6.5
 ```
 
 `flutter_riverpod`는 Flutter 앱에서 Riverpod를 사용하기 위한 패키지이고, `riverpod_annotation`와 `riverpod_generator`는 코드 생성을 위한 패키지입니다.
