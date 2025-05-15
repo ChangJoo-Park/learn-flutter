@@ -1,6 +1,8 @@
 ---
 title: JSON 직렬화 (freezed, json_serializable)
 ---
+import { Aside } from '@astrojs/starlight/components';
+
 
 REST API와 통신할 때 JSON 형식의 데이터를 주고받는 경우가 많습니다. Flutter/Dart에서는 이러한 JSON 데이터를 Dart 객체로 변환하고, 반대로 Dart 객체를 JSON으로 직렬화하는 과정이 필요합니다. 이 장에서는 `json_serializable`과 `freezed` 패키지를 활용한 JSON 직렬화 방법을 살펴보겠습니다.
 
@@ -163,6 +165,73 @@ class Product {
   static String _colorToJson(Color color) => '#${color.value.toRadixString(16).substring(2)}';
 }
 ```
+
+
+<Aside type="tip">
+
+[freezed_annotation](https://pub.dev/packages/freezed_annotation)의 JSONConverter를 이용하면 조금 더 쉽게 JSON 직렬화를 하실 수 있습니다.
+
+```sh
+dart pub add freezed_annotation
+```
+
+</Aside>
+
+```dart title="color_converter.dart"
+import 'package:flutter/material.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+
+/// Color 객체와 String(HEX) 간의 변환을 처리하는 JSONConverter
+class ColorConverter implements JsonConverter<Color, String> {
+  const ColorConverter();
+
+  @override
+  Color fromJson(String json) {
+    // '#RRGGBB' 형태의 HEX 문자열을 Color 객체로 변환
+    return Color(int.parse(json.substring(1), radix: 16) + 0xFF000000);
+  }
+
+  @override
+  String toJson(Color object) {
+    // Color 객체를 '#RRGGBB' 형태의 HEX 문자열로 변환
+    return '#${object.value.toRadixString(16).substring(2)}';
+  }
+}
+```
+
+```dart title="product.dart"
+import 'package:flutter/material.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+
+part 'product.g.dart';
+part 'product.freezed.dart';
+
+/// 객체 생성
+/// final Product product = Product(
+///   id: 1,
+///   name: '빨간 상품',
+///   color: Colors.red,
+/// );
+///
+/// JSON으로 변환 - color는 자동으로 '#ff0000' 같은 문자열로 변환됨
+/// final Map<String, dynamic> json = product.toJson();
+/// print(json); // {id: 1, name: 빨간 상품, color: #ff0000}
+///
+/// JSON에서 객체로 변환 - '#ff0000' 같은 문자열은 자동으로 Color 객체로 변환됨
+/// final Product loadedProduct = Product.fromJson(json);
+/// print(loadedProduct.color); // Color(0xFFFF0000)
+@freezed
+class Product with _$Product {
+  factory Product({
+    required int id,
+    required String name,
+    @ColorConverter() required Color color,  // JSONConverter 적용
+  }) = _Product;
+
+  factory Product.fromJson(Map<String, dynamic> json) => _$ProductFromJson(json);
+}
+```
+
 
 #### 중첩 객체 처리
 

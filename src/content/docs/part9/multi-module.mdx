@@ -62,9 +62,7 @@ Flutter에서 멀티 모듈 아키텍처를 구현하는 여러 방법이 있습
 
 #### 각 모듈의 pubspec.yaml 설정
 
-**app/pubspec.yaml**:
-
-```yaml
+```yaml title="app/pubspec.yaml"
 name: my_app
 description: Main application module
 version: 1.0.0+1
@@ -87,9 +85,7 @@ dependencies:
     path: ../packages/feature_profile
 ```
 
-**packages/core/pubspec.yaml**:
-
-```yaml
+```yaml title="packages/core/pubspec.yaml"
 name: core
 description: Core module with shared functionality
 version: 0.0.1
@@ -106,9 +102,7 @@ dependencies:
   shared_preferences: ^2.2.0
 ```
 
-**packages/feature_auth/pubspec.yaml**:
-
-```yaml
+```yaml title="packages/feature_auth/pubspec.yaml"
 name: feature_auth
 description: Authentication feature module
 version: 0.0.1
@@ -141,7 +135,7 @@ dart pub global activate melos
 
 2. 프로젝트 루트에 `melos.yaml` 파일 생성:
 
-```yaml
+```yaml title="melos.yaml"
 name: my_flutter_project
 
 packages:
@@ -179,8 +173,7 @@ melos test
 
 멀티 모듈 아키텍처는 Flutter Flavors와 결합하여 다양한 앱 버전(개발, 스테이징, 프로덕션 등)을 관리할 수 있습니다:
 
-```dart
-// app/lib/main_dev.dart
+```dart title="app/lib/main_dev.dart"
 import 'package:core/config.dart';
 import 'package:flutter/material.dart';
 import 'app.dart';
@@ -240,15 +233,15 @@ void main() {
 
 #### 인터페이스 기반 통신 예시
 
-```dart
-// core/lib/src/auth/auth_service.dart
+```dart title="core/lib/src/auth/auth_service.dart"
 abstract class AuthService {
   Future<User?> getCurrentUser();
   Future<User> signIn(String email, String password);
   Future<void> signOut();
 }
+```
 
-// feature_auth/lib/src/services/firebase_auth_service.dart
+```dart title="feature_auth/lib/src/services/firebase_auth_service.dart"
 class FirebaseAuthService implements AuthService {
   @override
   Future<User?> getCurrentUser() {
@@ -265,8 +258,9 @@ class FirebaseAuthService implements AuthService {
     // Firebase 구현
   }
 }
+```
 
-// app/lib/di/service_locator.dart
+```dart title="app/lib/di/service_locator.dart"
 void setupServiceLocator() {
   GetIt.I.registerSingleton<AuthService>(FirebaseAuthService());
 }
@@ -308,8 +302,7 @@ void setupServiceLocator() {
 
 각 모듈은 명확한 공개 API를 정의해야 합니다. 모듈 내부 구현은 숨기고 필요한 기능만 노출하는 것이 좋습니다.
 
-```dart
-// feature_auth/lib/feature_auth.dart
+```dart title="feature_auth/lib/feature_auth.dart"
 library feature_auth;
 
 // 공개 API
@@ -319,8 +312,7 @@ export 'src/domain/entities/user.dart';
 export 'src/di/auth_module.dart';
 ```
 
-```dart
-// feature_auth/lib/src/di/auth_module.dart
+```dart title="feature_auth/lib/src/di/auth_module.dart"
 import 'package:get_it/get_it.dart';
 import '../data/repositories/auth_repository_impl.dart';
 import '../data/datasources/auth_remote_datasource.dart';
@@ -375,8 +367,7 @@ class AuthModule {
 
 코어 모듈은 다른 모든 모듈에서 사용하는 공통 기능을 포함합니다:
 
-```dart
-// core/lib/core.dart
+```dart title="core/lib/core.dart"
 library core;
 
 export 'src/config/app_config.dart';
@@ -387,8 +378,7 @@ export 'src/di/service_locator.dart';
 export 'src/navigation/router.dart';
 ```
 
-```dart
-// core/lib/src/config/app_config.dart
+```dart title="core/lib/src/config/app_config.dart"
 enum Environment { dev, staging, prod }
 
 class AppConfig {
@@ -416,8 +406,7 @@ class AppConfig {
 
 UI 키트 모듈은 앱 전체에서 사용되는 공통 UI 컴포넌트를 포함합니다:
 
-```dart
-// ui_kit/lib/ui_kit.dart
+```dart title="ui_kit/lib/ui_kit.dart"
 library ui_kit;
 
 export 'src/buttons/primary_button.dart';
@@ -426,8 +415,7 @@ export 'src/theme/app_theme.dart';
 export 'src/inputs/text_field.dart';
 ```
 
-```dart
-// ui_kit/lib/src/buttons/primary_button.dart
+```dart title="ui_kit/lib/src/buttons/primary_button.dart"
 import 'package:flutter/material.dart';
 
 class PrimaryButton extends StatelessWidget {
@@ -458,8 +446,7 @@ class PrimaryButton extends StatelessWidget {
 
 상품 기능 모듈은 상품 목록, 상세 정보, 검색 등의 기능을 담당합니다:
 
-```dart
-// feature_products/lib/feature_products.dart
+```dart title="feature_products/lib/feature_products.dart"
 library feature_products;
 
 export 'src/presentation/pages/product_list_page.dart';
@@ -468,8 +455,7 @@ export 'src/domain/entities/product.dart';
 export 'src/di/products_module.dart';
 ```
 
-```dart
-// feature_products/lib/src/presentation/pages/product_list_page.dart
+```dart title="feature_products/lib/src/presentation/pages/product_list_page.dart"
 import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -516,8 +502,7 @@ class ProductListPage extends ConsumerWidget {
 
 앱 모듈은 모든 기능 모듈을 통합하고 앱의 진입점 역할을 합니다:
 
-```dart
-// app/lib/main_dev.dart
+```dart title="app/lib/main_dev.dart"
 import 'package:core/core.dart';
 import 'package:feature_auth/feature_auth.dart';
 import 'package:feature_products/feature_products.dart';
@@ -548,8 +533,7 @@ void main() {
 }
 ```
 
-```dart
-// app/lib/app.dart
+```dart title="app/lib/app.dart"
 import 'package:core/core.dart';
 import 'package:ui_kit/ui_kit.dart';
 import 'package:flutter/material.dart';
@@ -587,7 +571,7 @@ class MyApp extends StatelessWidget {
 - 필요한 경우 이벤트 기반 통신을 사용합니다.
 - 공통 코드를 코어 모듈로 이동시킵니다.
 
-```dart
+```dart title="core/lib/core.dart"
 // 이벤트 기반 통신 예시 (core 모듈)
 class AppEvent {
   // 이벤트 정의
