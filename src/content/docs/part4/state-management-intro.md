@@ -149,7 +149,6 @@ Consumer<CounterModel>(
 
 - **Riverpod**: Provider의 개선 버전으로, 컴파일 타임 안전성 및 테스트 용이성 강화
 - **Bloc/Cubit**: 비즈니스 로직을 명확하게 분리하는 패턴
-- **GetX**: 간편한 API와 다양한 기능을 제공하는 프레임워크
 - **MobX**: 반응형 프로그래밍 기반의 상태 관리
 - **Redux**: 예측 가능한 상태 컨테이너
 

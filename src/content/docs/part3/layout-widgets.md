@@ -815,8 +815,6 @@ Column _buildStatColumn(String label, String value) {
 }
 ```
 
-위젯 구조:
-
 ## 레이아웃 디버깅
 
 ### 문제 식별하기
