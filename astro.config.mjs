@@ -1,6 +1,7 @@
 import { rehypeMermaid } from "@beoe/rehype-mermaid";
 import { getCache } from "@beoe/cache";
 import starlightGiscus from 'starlight-giscus'
+
 const googleAnalyticsId = 'G-FTYYK8J5MY'
 
 const cache = await getCache();
@@ -25,7 +26,9 @@ export default defineConfig({
     sitemap(),
     astroExpressiveCode({
       themes: ["dracula"],
-      plugins: [pluginLineNumbers()],
+      plugins: [
+        pluginLineNumbers(),
+      ],
     }),
     starlight({
       credits: true,

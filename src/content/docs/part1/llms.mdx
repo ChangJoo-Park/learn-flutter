@@ -1,0 +1,79 @@
+---
+title: LLM 설정
+---
+
+이 문서는 코드 에디터를 위한 llms.txt 파일을 지원합니다.
+
+다음 경로를 사용하는 에디터에 적용하시면 이 문서를 기준으로 프로젝트를 진행하실 수 있습니다.
+
+
+루트 llms.txt
+
+```
+https://changjoo-park.github.io/learn-flutter/llms.txt
+```
+
+
+간소화 버전
+
+```
+https://changjoo-park.github.io/learn-flutter/llms-small.txt
+```
+
+전체 버전
+
+```
+https://changjoo-park.github.io/learn-flutter/llms-full.txt
+```
+
+
+
+## Visual Studio Code
+
+프롬프트에 다음과 같이 입력합니다.
+
+```text
+#fetch https://changjoo-park.github.io/learn-flutter/llms-full.txt
+```
+
+프로젝트 레벨에서 이용하려면
+
+1. 터미널에서 프로젝트 경로로 이동 후 다음과 같이 입력합니다.
+
+```sh
+curl -L https://changjoo-park.github.io/learn-flutter/llms-full.txt --create-dirs -o .vscode/learn_flutter.md
+```
+
+2. `.vscode/settings.json` 에 다음을 입력합니다.
+
+```json title=".vscode/settings.json"
+{
+  "github.copilot.chat.codeGeneration.instructions": [
+    {
+      "file": "./.vscode/learn_flutter.md"
+    }
+  ]
+}
+```
+
+
+
+## Cursor
+
+프롬프트에 다음과 같이 입력합니다.
+
+```text
+@web https://changjoo-park.github.io/learn-flutter/llms-full.txt
+```
+
+계속 사용하려면
+
+1. `CMD` + `Shift` + `P` 를 눌러 명령 팔레트를 엽니다.
+2. `Add new custom docs` 를 입력합니다.
+3. 아래 내용을 입력합니다.
+
+```text
+https://changjoo-park.github.io/learn-flutter/llms-full.txt
+```
+
+4. 채팅 UI에서 @docs 를 입력한 후 추가된 문서를 선택합니다.

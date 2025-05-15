@@ -3,7 +3,9 @@ export const sidebars = [
     label: "📦 1. 시작하기",
     items: [
       { label: "소개", slug: "part1/introduction" },
+      { label: "변경사항", slug: "part1/changelog" },
       { label: "개발 환경 구성", slug: "part1/setup" },
+      { label: "LLM 설정", slug: "part1/llms", badge: 'new' },
       { label: "첫 프로젝트 생성 및 실행", slug: "part1/first-project" },
       { label: "Flutter 프로젝트 구조 이해", slug: "part1/project-structure" },
     ],
