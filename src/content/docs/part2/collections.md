@@ -4,6 +4,17 @@ title: 컬렉션과 반복문
 
 Dart는 데이터를 저장하고 조작하기 위한 다양한 컬렉션 타입과 반복문을 제공합니다. 이 장에서는 Dart의 컬렉션 타입(List, Set, Map)과 이를 처리하기 위한 다양한 반복문 및 반복 연산을 알아보겠습니다.
 
+<Aside type="tip">
+
+아래 내용 외에 컬렉션 타입을 조작하는 일이 잦은 경우 [collection](https://pub.dev/packages/collection) 패키지를 사용하세요.
+
+```sh
+dart pub add collection
+```
+
+</Aside>
+
+
 ## 컬렉션 타입
 
 ### 1. List (리스트)

@@ -57,7 +57,7 @@ final height = 175.5;  // double로 추론
 
 ### 3. 비동기 프로그래밍 지원
 
-Dart는 `Future`, `Stream`, `async`, `await` 등을 통해 비동기 프로그래밍을 자연스럽게 지원합니다.
+Dart는 `Future`, `Stream`, `async`, `await` 등을 통해 비동기 프로그래밍을 지원합니다.
 
 ```dart
 Future<String> fetchData() async {
@@ -75,7 +75,7 @@ void main() async {
 
 ### 4. Null 안전성
 
-Dart 2.12부터 Null 안전성을 도입하여, 변수가 null이 될 수 있는지 여부를 타입 시스템에서 명시합니다.
+Dart 2.12부터 Null 안전성을 도입하여, 변수가 null 가능성을 타입 시스템에서 명시합니다.
 
 ```dart
 // null이 될 수 없는 변수
