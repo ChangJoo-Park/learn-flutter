@@ -37,8 +37,8 @@ pubspec.yaml에 다음 패키지를 추가합니다:
 
 ```yaml
 dependencies:
-  firebase_core: ^2.15.0
-  firebase_analytics: ^10.4.4
+  firebase_core: ^3.13.0
+  firebase_analytics: ^11.4.5
 ```
 
 그리고 패키지를 설치합니다:

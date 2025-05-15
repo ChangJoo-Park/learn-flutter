@@ -45,8 +45,8 @@ pubspec.yaml에 다음 패키지를 추가합니다:
 
 ```yaml
 dependencies:
-  firebase_core: ^2.15.0
-  firebase_crashlytics: ^3.3.4
+  firebase_core: ^3.13.0
+  firebase_crashlytics: ^4.3.5
 ```
 
 패키지를 설치합니다:
