@@ -110,7 +110,6 @@ export const sidebars = [
     items: [
       { label: "기능별 vs 계층별 폴더 구조", slug: "part9/folder-structure" },
       { label: "멀티 모듈 아키텍처", slug: "part9/multi-module" },
-      { label: "melos를 이용한 모노레포", slug: "part9/monorepo", badge: "🚧" },
     ],
   },
   {

@@ -1,6 +1,7 @@
 ---
 title: 기능별 vs 계층별 폴더 구조
 ---
+import { FileTree } from '@astrojs/starlight/components';
 
 Flutter 프로젝트를 시작할 때 가장 중요한 결정 중 하나는 코드를 어떻게 구성할 것인지 결정하는 것입니다. 적절한 프로젝트 구조는 코드의 가독성을 높이고, 확장성을 향상시키며, 팀 협업을 원활하게 합니다. 이 문서에서는 두 가지 주요 프로젝트 구조 접근 방식인 '기능별 구조'와 '계층별 구조'에 대해 살펴보고, 각각의 장단점 및 적합한 사용 사례를 분석합니다.
 
@@ -21,53 +22,57 @@ Flutter 프로젝트를 시작할 때 가장 중요한 결정 중 하나는 코�
 
 ### 계층별 구조의 기본 예시
 
-```
-lib/
-├── models/           # 데이터 모델 클래스
-│   ├── user.dart
-│   ├── product.dart
-│   └── order.dart
-├── views/            # UI 컴포넌트 및 화면
-│   ├── home_screen.dart
-│   ├── product_screen.dart
-│   └── profile_screen.dart
-├── controllers/      # 비즈니스 로직 및 상태 관리
-│   ├── auth_controller.dart
-│   ├── product_controller.dart
-│   └── order_controller.dart
-├── services/         # 외부 서비스 통신 (API, 데이터베이스 등)
-│   ├── api_service.dart
-│   ├── storage_service.dart
-│   └── analytics_service.dart
-├── utils/            # 유틸리티 함수 및 상수
-│   ├── constants.dart
-│   ├── extensions.dart
-│   └── helpers.dart
-└── main.dart
-```
+<FileTree>
+
+- lib/
+  - models/           # 데이터 모델 클래스
+    - user.dart
+    - product.dart
+    - order.dart
+  - views/            # UI 컴포넌트 및 화면
+    - home_screen.dart
+    - product_screen.dart
+    - profile_screen.dart
+  - controllers/      # 비즈니스 로직 및 상태 관리
+    - auth_controller.dart
+    - product_controller.dart
+    - order_controller.dart
+  - services/         # 외부 서비스 통신 (API, 데이터베이스 등)
+    - api_service.dart
+    - storage_service.dart
+    - analytics_service.dart
+  - utils/            # 유틸리티 함수 및 상수
+    - constants.dart
+    - extensions.dart
+    - helpers.dart
+  - main.dart
+
+</FileTree>
 
 ### 계층별 구조의 변형: MVVM 패턴
 
-```
-lib/
-├── data/
-│   ├── models/       # 데이터 모델
-│   ├── repositories/ # 데이터 액세스 계층
-│   └── data_sources/ # 로컬/원격 데이터 소스
-├── domain/
-│   ├── entities/     # 비즈니스 모델
-│   ├── repositories/ # 리포지토리 인터페이스
-│   └── usecases/     # 비즈니스 규칙 및 로직
-├── presentation/
-│   ├── pages/        # 화면
-│   ├── widgets/      # 재사용 가능한 UI 컴포넌트
-│   └── viewmodels/   # 뷰 모델 (상태 관리)
-├── core/
-│   ├── utils/        # 유틸리티 함수
-│   ├── constants/    # 상수
-│   └── theme/        # 앱 테마
-└── main.dart
-```
+<FileTree>
+
+- lib/
+  - data/
+    - models/       # 데이터 모델
+    - repositories/ # 데이터 액세스 계층
+    - data_sources/ # 로컬/원격 데이터 소스
+  - domain/
+    - entities/     # 비즈니스 모델
+    - repositories/ # 리포지토리 인터페이스
+    - usecases/     # 비즈니스 규칙 및 로직
+  - presentation/
+    - pages/        # 화면
+    - widgets/      # 재사용 가능한 UI 컴포넌트
+    - viewmodels/   # 뷰 모델 (상태 관리)
+  - core/
+    - utils/        # 유틸리티 함수
+    - constants/    # 상수
+    - theme/        # 앱 테마
+  - main.dart
+
+</FileTree>
 
 ### 계층별 구조의 장점
 
@@ -91,72 +96,72 @@ lib/
 
 ### 기능별 구조의 기본 예시
 
-```
-lib/
-├── features/
-│   ├── auth/                 # 인증 관련 기능
-│   │   ├── data/
-│   │   │   ├── repositories/
-│   │   │   └── models/
-│   │   ├── domain/
-│   │   │   └── usecases/
-│   │   └── presentation/
-│   │       ├── pages/
-│   │       │   ├── login_page.dart
-│   │       │   └── signup_page.dart
-│   │       ├── widgets/
-│   │       └── providers/
-│   │
-│   ├── products/             # 제품 관련 기능
-│   │   ├── data/
-│   │   ├── domain/
-│   │   └── presentation/
-│   │       ├── pages/
-│   │       │   ├── product_list_page.dart
-│   │       │   └── product_detail_page.dart
-│   │       ├── widgets/
-│   │       └── providers/
-│   │
-│   └── profile/              # 프로필 관련 기능
-│       ├── data/
-│       ├── domain/
-│       └── presentation/
-│
-├── core/                     # 공통 기능
-│   ├── network/
-│   ├── storage/
-│   ├── theme/
-│   └── utils/
-│
-└── main.dart
-```
+<FileTree>
+
+- lib/
+  - features/
+    - auth/                 # 인증 관련 기능
+      - data/
+        - repositories/
+        - models/
+      - domain/
+        - usecases/
+      - presentation/
+        - pages/
+          - login_page.dart
+          - signup_page.dart
+        - widgets/
+        - providers/
+    - products/             # 제품 관련 기능
+      - data/
+      - domain/
+      - presentation/
+        - pages/
+          - product_list_page.dart
+          - product_detail_page.dart
+        - widgets/
+        - providers/
+    - profile/              # 프로필 관련 기능
+      - data/
+      - domain/
+      - presentation/
+  - core/                     # 공통 기능
+    - network/
+    - storage/
+    - theme/
+    - utils/
+  - main.dart
+
+</FileTree>
 
 ### 기능별 구조의 변형: DDD(Domain-Driven Design) 적용
 
-```
-lib/
-├── application/              # 애플리케이션 서비스 (UseCase)
-│   ├── auth/
-│   ├── products/
-│   └── profile/
-├── domain/                   # 도메인 모델 및 규칙
-│   ├── auth/
-│   ├── products/
-│   └── profile/
-├── infrastructure/           # 인프라 계층 (리포지토리 구현, 데이터 소스)
-│   ├── auth/
-│   ├── products/
-│   └── profile/
-├── presentation/             # UI 계층
-│   ├── auth/
-│   ├── products/
-│   └── profile/
-├── shared/                   # 공통 기능
-│   ├── constants/
-│   ├── extensions/
-│   └── widgets/
-└── main.dart
-```
+<FileTree>
+
+- lib/
+  - application/              # 애플리케이션 서비스 (UseCase)
+    - auth/
+    - products/
+    - profile/
+  - domain/                   # 도메인 모델 및 규칙
+    - auth/
+    - products/
+    - profile/
+  - infrastructure/           # 인프라 계층 (리포지토리 구현, 데이터 소스)
+    - auth/
+    - products/
+    - profile/
+  - presentation/             # UI 계층
+    - auth/
+    - products/
+    - profile/
+  - shared/                   # 공통 기능
+    - constants/
+    - extensions/
+    - widgets/
+  - main.dart
+
+</FileTree>
 
 ### 기능별 구조의 장점
 
@@ -179,126 +184,125 @@ lib/
 
 ### 계층별 구조 예시
 
-```dart
-lib/
-├── models/              # 데이터 모델
-│   ├── user.dart
-│   ├── product.dart
-│   └── order.dart
-├── providers/           # Riverpod 프로바이더
-│   ├── auth_provider.dart
-│   ├── product_provider.dart
-│   └── cart_provider.dart
-├── repositories/        # 데이터 액세스 계층
-│   ├── auth_repository.dart
-│   ├── product_repository.dart
-│   └── order_repository.dart
-├── screens/             # 화면 위젯
-│   ├── auth/
-│   │   ├── login_screen.dart
-│   │   └── signup_screen.dart
-│   ├── products/
-│   │   ├── product_list_screen.dart
-│   │   └── product_detail_screen.dart
-│   └── profile/
-│       └── profile_screen.dart
-├── widgets/             # 재사용 위젯
-│   ├── product_card.dart
-│   ├── custom_button.dart
-│   └── loading_indicator.dart
-├── router/              # GoRouter 설정
-│   └── router.dart
-├── utils/               # 유틸리티
-│   ├── constants.dart
-│   └── extensions.dart
-└── main.dart
-```
+<FileTree>
+
+- lib/
+  - models/              # 데이터 모델
+    - user.dart
+    - product.dart
+    - order.dart
+  - providers/           # Riverpod 프로바이더
+    - auth_provider.dart
+    - product_provider.dart
+    - cart_provider.dart
+  - repositories/        # 데이터 액세스 계층
+    - auth_repository.dart
+    - product_repository.dart
+    - order_repository.dart
+  - screens/             # 화면 위젯
+    - auth/
+      - login_screen.dart
+      - signup_screen.dart
+    - products/
+      - product_list_screen.dart
+      - product_detail_screen.dart
+    - profile/
+      - profile_screen.dart
+  - widgets/             # 재사용 위젯
+    - product_card.dart
+    - custom_button.dart
+    - loading_indicator.dart
+  - router/              # GoRouter 설정
+    - router.dart
+  - utils/               # 유틸리티
+    - constants.dart
+    - extensions.dart
+  - main.dart
+
+</FileTree>
 
 ### 기능별 구조 예시
 
-```dart
-lib/
-├── features/
-│   ├── auth/
-│   │   ├── models/
-│   │   │   └── user.dart
-│   │   ├── repositories/
-│   │   │   └── auth_repository.dart
-│   │   ├── providers/
-│   │   │   └── auth_provider.dart
-│   │   ├── screens/
-│   │   │   ├── login_screen.dart
-│   │   │   └── signup_screen.dart
-│   │   └── widgets/
-│   │       ├── login_form.dart
-│   │       └── social_login_buttons.dart
-│   │
-│   ├── products/
-│   │   ├── models/
-│   │   │   └── product.dart
-│   │   ├── repositories/
-│   │   │   └── product_repository.dart
-│   │   ├── providers/
-│   │   │   └── product_provider.dart
-│   │   ├── screens/
-│   │   │   ├── product_list_screen.dart
-│   │   │   └── product_detail_screen.dart
-│   │   └── widgets/
-│   │       └── product_card.dart
-│   │
-│   └── cart/
-│       ├── models/
-│       │   └── cart_item.dart
-│       ├── repositories/
-│       │   └── cart_repository.dart
-│       ├── providers/
-│       │   └── cart_provider.dart
-│       ├── screens/
-│       │   ├── cart_screen.dart
-│   │       └── checkout_screen.dart
-│       └── widgets/
-│           └── cart_item_widget.dart
-│
-├── core/
-│   ├── router/
-│   │   └── router.dart
-│   ├── theme/
-│   │   └── app_theme.dart
-│   ├── widgets/
-│   │   ├── custom_button.dart
-│   │   └── loading_indicator.dart
-│   └── utils/
-│       ├── constants.dart
-│       └── extensions.dart
-│
-└── main.dart
-```
+<FileTree>
+
+- lib/
+  - features/
+    - auth/
+      - models/
+        - user.dart
+      - repositories/
+        - auth_repository.dart
+      - providers/
+        - auth_provider.dart
+      - screens/
+        - login_screen.dart
+        - signup_screen.dart
+      - widgets/
+        - login_form.dart
+        - social_login_buttons.dart
+    - products/
+      - models/
+        - product.dart
+      - repositories/
+        - product_repository.dart
+      - providers/
+        - product_provider.dart
+      - screens/
+        - product_list_screen.dart
+        - product_detail_screen.dart
+      - widgets/
+        - product_card.dart
+    - cart/
+      - models/
+        - cart_item.dart
+      - repositories/
+        - cart_repository.dart
+      - providers/
+        - cart_provider.dart
+      - screens/
+        - cart_screen.dart
+        - checkout_screen.dart
+      - widgets/
+        - cart_item_widget.dart
+  - core/
+    - router/
+      - router.dart
+    - theme/
+      - app_theme.dart
+    - widgets/
+      - custom_button.dart
+      - loading_indicator.dart
+    - utils/
+      - constants.dart
+      - extensions.dart
+  - main.dart
+
+</FileTree>
 
 ## 하이브리드 접근 방식
 
 많은 실제 프로젝트에서는 두 가지 접근 방식을 혼합하여 사용합니다. 다음은 하이브리드 구조의 예시입니다:
 
-```
-lib/
-├── features/               # 주요 기능별 구성
-│   ├── auth/
-│   ├── products/
-│   └── cart/
-│
-├── shared/                 # 공유 컴포넌트
-│   ├── models/             # 공통 모델
-│   ├── widgets/            # 공통 위젯
-│   ├── services/           # 공통 서비스
-│   └── utils/              # 유틸리티
-│
-├── core/                   # 핵심 인프라
-│   ├── network/            # 네트워크 관련
-│   ├── storage/            # 로컬 스토리지
-│   ├── di/                 # 의존성 주입
-│   └── router/             # 라우팅
-│
-└── main.dart
-```
+<FileTree>
+
+- lib/
+  - features/               # 주요 기능별 구성
+    - auth/
+    - products/
+    - cart/
+  - shared/                 # 공유 컴포넌트
+    - models/             # 공통 모델
+    - widgets/            # 공통 위젯
+    - services/           # 공통 서비스
+    - utils/              # 유틸리티
+  - core/                   # 핵심 인프라
+    - network/            # 네트워크 관련
+    - storage/            # 로컬 스토리지
+    - di/                 # 의존성 주입
+    - router/             # 라우팅
+  - main.dart
+
+</FileTree>
 
 이 접근 방식은 다음과 같은 이점을 제공합니다:
 

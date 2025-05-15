@@ -1,6 +1,7 @@
 ---
 title: 멀티 모듈 아키텍처
 ---
+import { FileTree } from '@astrojs/starlight/components';
 
 대규모 Flutter 프로젝트에서는 코드베이스가 커짐에 따라 빌드 시간 증가, 유지보수 복잡성, 팀 협업 어려움 등의 문제가 발생할 수 있습니다. 이러한 문제를 해결하기 위한 방법 중 하나가 멀티 모듈 아키텍처입니다. 이 문서에서는 Flutter에서 멀티 모듈 아키텍처를 구현하는 방법, 장단점, 그리고 실제 적용 사례를 살펴보겠습니다.
 
@@ -35,27 +36,29 @@ Flutter에서 멀티 모듈 아키텍처를 구현하는 여러 방법이 있습
 
 #### 프로젝트 구조 예시
 
-```
-my_flutter_project/
-├── app/                 # 메인 앱 모듈
-│   ├── lib/
-│   ├── pubspec.yaml
-│   └── ...
-├── packages/
-│   ├── core/            # 핵심 기능 모듈
-│   │   ├── lib/
-│   │   └── pubspec.yaml
-│   ├── feature_auth/    # 인증 기능 모듈
-│   │   ├── lib/
-│   │   └── pubspec.yaml
-│   ├── feature_home/    # 홈 기능 모듈
-│   │   ├── lib/
-│   │   └── pubspec.yaml
-│   └── feature_profile/ # 프로필 기능 모듈
-│       ├── lib/
-│       └── pubspec.yaml
-└── pubspec.yaml         # 루트 pubspec.yaml (옵션)
-```
+<FileTree>
+
+- my_flutter_project/
+  - app/                 # 메인 앱 모듈
+    - lib/
+    - pubspec.yaml
+    - ...
+  - packages/
+    - core/            # 핵심 기능 모듈
+      - lib/
+      - pubspec.yaml
+    - feature_auth/    # 인증 기능 모듈
+      - lib/
+      - pubspec.yaml
+    - feature_home/    # 홈 기능 모듈
+      - lib/
+      - pubspec.yaml
+    - feature_profile/ # 프로필 기능 모듈
+      - lib/
+      - pubspec.yaml
+  - pubspec.yaml         # 루트 pubspec.yaml (옵션)
+
+</FileTree>
 
 #### 각 모듈의 pubspec.yaml 설정
 
@@ -275,29 +278,31 @@ void setupServiceLocator() {
 
 ### 기능 모듈 예시
 
-```
-feature_auth/
-├── lib/
-│   ├── src/
-│   │   ├── data/
-│   │   │   ├── models/
-│   │   │   ├── repositories/
-│   │   │   └── datasources/
-│   │   ├── domain/
-│   │   │   ├── entities/
-│   │   │   ├── usecases/
-│   │   │   └── repositories/
-│   │   ├── presentation/
-│   │   │   ├── pages/
-│   │   │   ├── widgets/
-│   │   │   └── providers/
-│   │   └── di/
-│   │       └── auth_module.dart
-│   ├── feature_auth.dart      # 공개 API
-│   └── testing.dart          # 테스트 지원 API (선택사항)
-├── test/
-└── pubspec.yaml
-```
+<FileTree>
+
+- feature_auth/
+  - lib/
+    - src/
+      - data/
+        - models/
+        - repositories/
+        - datasources/
+      - domain/
+        - entities/
+        - usecases/
+        - repositories/
+      - presentation/
+        - pages/
+        - widgets/
+        - providers/
+      - di/
+        - auth_module.dart
+    - feature_auth.dart      # 공개 API
+    - testing.dart          # 테스트 지원 API (선택사항)
+  - test/
+  - pubspec.yaml
+
+</FileTree>
 
 ### 공개 API 설계
 
@@ -350,19 +355,21 @@ class AuthModule {
 
 ### 프로젝트 구조
 
-```
-ecommerce_app/
-├── app/                   # 메인 앱 모듈
-├── packages/
-│   ├── core/              # 핵심 기능 모듈
-│   ├── ui_kit/            # UI 컴포넌트 모듈
-│   ├── feature_auth/      # 인증 기능 모듈
-│   ├── feature_products/  # 상품 기능 모듈
-│   ├── feature_cart/      # 장바구니 기능 모듈
-│   ├── feature_checkout/  # 결제 기능 모듈
-│   └── feature_profile/   # 프로필 기능 모듈
-└── melos.yaml
-```
+<FileTree>
+
+- ecommerce_app/
+  - app/                   # 메인 앱 모듈
+  - packages/
+    - core/              # 핵심 기능 모듈
+    - ui_kit/            # UI 컴포넌트 모듈
+    - feature_auth/      # 인증 기능 모듈
+    - feature_products/  # 상품 기능 모듈
+    - feature_cart/      # 장바구니 기능 모듈
+    - feature_checkout/  # 결제 기능 모듈
+    - feature_profile/   # 프로필 기능 모듈
+  - melos.yaml
+
+</FileTree>
 
 ### 코어 모듈
 
