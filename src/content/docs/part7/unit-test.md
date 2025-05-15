@@ -400,7 +400,7 @@ dev_dependencies:
 그리고 다음 명령어를 실행하여 Mock 클래스를 생성합니다:
 
 ```bash
-flutter pub run build_runner build
+dart run build_runner build
 ```
 
 ## 비즈니스 로직 레이어(Provider, Riverpod, Bloc 등) 테스트

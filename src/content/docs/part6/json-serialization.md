@@ -117,7 +117,7 @@ class User {
 다음 명령어로 코드를 생성합니다:
 
 ```bash
-flutter pub run build_runner build
+dart run build_runner build
 ```
 
 변경 사항을 감시하면서 지속적으로 코드를 생성하려면:
@@ -129,7 +129,7 @@ flutter pub run build_runner watch
 기존 생성 파일과 충돌이 있을 경우:
 
 ```bash
-flutter pub run build_runner build --delete-conflicting-outputs
+dart run build_runner build --delete-conflicting-outputs
 ```
 
 ### 4. json_serializable 고급 기능
@@ -337,7 +337,7 @@ class User with _$User {
 ### 3. 코드 생성 실행
 
 ```bash
-flutter pub run build_runner build --delete-conflicting-outputs
+dart run build_runner build --delete-conflicting-outputs
 ```
 
 ### 4. freezed 활용

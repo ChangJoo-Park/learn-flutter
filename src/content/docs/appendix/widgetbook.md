@@ -167,7 +167,7 @@ targets:
 다음 명령어로 코드를 생성합니다:
 
 ```bash
-flutter pub run build_runner build
+dart run build_runner build
 ```
 
 ## 위젯 사용 사례 문서화

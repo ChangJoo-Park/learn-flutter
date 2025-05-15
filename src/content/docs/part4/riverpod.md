@@ -203,7 +203,7 @@ ref.read(counterProvider.notifier).increment();
 코드 생성을 실행하려면 다음 명령을 사용합니다:
 
 ```bash
-flutter pub run build_runner build
+dart run build_runner build
 ```
 
 ### 비동기 Provider 정의
