@@ -29,7 +29,7 @@ cd todo_app
 dependencies:
   flutter:
     sdk: flutter
-  go_router: ^10.0.0
+  go_router: ^15.1.2
   provider: ^6.0.5
   uuid: ^3.0.7
 ```

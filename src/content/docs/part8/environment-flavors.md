@@ -4,6 +4,18 @@ title: 환경 분리 및 Flavor 설정
 
 실제 앱 개발에서는 개발, 테스트, 스테이징, 프로덕션 등 여러 환경을 관리해야 합니다. Flutter에서는 Flavor라는 기능을 통해 서로 다른 환경에 맞는 앱 변형을 만들 수 있습니다. 이 장에서는 Flutter에서 환경을 분리하고 Flavor를 설정하는 방법에 대해 알아보겠습니다.
 
+<Aside type="tip">
+
+[flutter_flavorizr](https://pub.dev/packages/flutter_flavorizr)를 이용하면 조금 더 쉽게 Flavor 설정을 하실 수 있습니다.
+
+```sh
+dart pub add flutter_flavorizr
+```
+
+</Aside>
+
+
+
 ## 환경 분리의 필요성
 
 동일한 코드베이스로 다양한 환경에서 작동하는 앱을 만들어야 하는 경우가 많습니다:

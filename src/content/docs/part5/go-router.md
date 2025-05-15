@@ -22,7 +22,7 @@ pubspec.yaml 파일에 go_router 패키지를 추가합니다:
 dependencies:
   flutter:
     sdk: flutter
-  go_router: ^10.0.0 # 최신 버전을 확인하세요
+  go_router: ^15.1.2 # 최신 버전을 확인하세요
 ```
 
 그리고 패키지를 설치합니다:
