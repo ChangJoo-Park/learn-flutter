@@ -16,3 +16,7 @@ iOS(+ iPadOS), Android(+ 태블릿)에서 동작하는 여러 앱 서비스를 F
 위 경험을 토대로 Flutter 프레임워크를 이용하여 앱 개발하면서 필요한 내용들을 본 문서에 담았습니다.
 
 이 문서 혹은 개발과 관련된 문의는 댓글 혹은 changjoo.app@gmail.com 으로 문의바랍니다.
+
+
+<iframe data-tally-src="https://tally.so/embed/w559Vv?alignLeft=1&transparentBackground=1&dynamicHeight=1" loading="lazy" width="100%" height="1000" frameborder="0" marginheight="0" marginwidth="0" title="Flutter 개발자 설문"></iframe>
+<script>var d=document,w="https://tally.so/widgets/embed.js",v=function(){"undefined"!=typeof Tally?Tally.loadEmbeds():d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach((function(e){e.src=e.dataset.tallySrc}))};if("undefined"!=typeof Tally)v();else if(d.querySelector('script[src="'+w+'"]')==null){var s=d.createElement("script");s.src=w,s.onload=v,s.onerror=v,d.body.appendChild(s);}</script>
