@@ -1,5 +1,9 @@
 ---
 title: 개발 환경 구성
+banner:
+  content: |
+    안녕하세요! 이 페이지를 보시는 분들에게 설문을 받고 있습니다.
+    <a href="https://tally.so/r/w559Vv" target="_blank">여기를 눌러서 참여부탁드려요!</a>
 ---
 
 Flutter 개발을 시작하기 위해 필요한 환경을 구성해 보겠습니다. 이 과정에는 Flutter SDK 설치, 코드 에디터 설정, 그리고 개발 도구 구성이 포함됩니다.
